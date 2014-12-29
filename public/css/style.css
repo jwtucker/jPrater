@@ -1,0 +1,28 @@
+body{
+	background-color: #ccc;
+}
+
+.navBar{
+	width: 100%;
+	display:inline-block;
+	background-color: #000;
+	padding:0;
+}
+
+.navBarElement{
+	display:inline-block;
+	margin:15px 25px;
+}
+
+.navBarElement h1{
+	color:#cdcdcd;
+	margin:0 0;
+	font-size:22px;
+	font-family: 'Oswald', sans-serif;
+	margin-bottom: 2px;
+}
+
+.navBarMenu{
+	display:none;
+	position: absolute;
+}
