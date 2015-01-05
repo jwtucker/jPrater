@@ -1,19 +1,27 @@
 // modules =================================================
-var express        = require('express');
-var app            = express();
-var bodyParser     = require('body-parser');
-var methodOverride = require('method-override');
+var express        	= require('express');
+var app            	= express();
+var bodyParser     	= require('body-parser');
+var methodOverride 	= require('method-override');
+var mongoose 		= require('mongoose');
+var passport 		= require('passport');
+var flash 			= require('connect-flash');
+
+var morgan			= require('morgan');
+var cookieParser 	= require('cookie-parser');
+var session			= require('express-session');
 
 // configuration ===========================================
     
 // config files
 var db = require('./config/db');
+require('./config/passport')(passport);
 //  our port
 var port = process.env.PORT || 8080; 
 
 // connect to our mongoDB database 
 // (uncomment after you enter in your own credentials in config/db.js)
-// mongoose.connect(db.url); 
+mongoose.connect(db.url); 
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 
@@ -31,8 +39,16 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public')); 
 
+
+// NEW STUFF ******************/////////////////////////
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(session({ secret: "testSecret", saveUninitialized:true, resave:true}));
+app.use(passport.initialize());
+app.use(flash());
+
 // routes ==================================================
-require('./app/routes')(app); // configure our routes
+require('./app/routes')(app, passport); // configure our routes
 
 // start app ===============================================
 // startup our app at http://localhost:8080

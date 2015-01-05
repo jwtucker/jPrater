@@ -2,94 +2,139 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <base href="/">
+  <meta charset="UTF-8">
+  <base href="/">
 
-    <title>Justin Prater Automobile Modification</title>
+  <title>Retrofit Authority</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css"> <!-- custom styles -->
-    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700|Merriweather' rel='stylesheet' type='text/css'>
+  <!-- CSS -->
+  <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css"> <!-- custom styles -->
+  <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Merriweather' rel='stylesheet' type='text/css'>
 
-    <!-- JS -->
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/angular-route/angular-route.min.js"></script>
-    <script src="libs/jquery/dist/jquery.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- JS -->
+  <script src="libs/underscore/underscore-min.js"></script>
+  <script src="libs/angular/angular.min.js"></script>
+  <script src="libs/angular-route/angular-route.min.js"></script>
+  <script src="libs/jquery/dist/jquery.min.js"></script>
+  <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="libs/custom/custom.js"></script>
 
-    <!-- ANGULAR CUSTOM -->
-    <script src="js/controllers/MainCtrl.js"></script>
-    <script src="js/services/Service.js"></script>
-    <script src="js/appRoutes.js"></script>
-    <script src="js/app.js"></script>
-    
+  <!-- ANGULAR CUSTOM -->
+  <script src="js/filters/filters.js"></script>
+  <script src="js/controllers/MainCtrl.js"></script>
+  <script src="js/controllers/GalleryCtrl.js"></script>
+  <script src="js/controllers/SignupCtrl.js"></script>
+  <script src="js/services/Service.js"></script>
+  <script src="js/appRoutes.js"></script>
+  <script src="js/app.js"></script>
+
 </head>
-<body ng-app="sampleApp" ng-controller="MainController">
+<body ng-app="sampleApp">
 
-<div class="container">
-
-
-<!-- NAVBAR -->
-    <div class="row">
-       <div class="col-lg-12">
-            <div class="navBar">
-               <div class="navBarElement">
-                   <h1>Retrofit Kits</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>HID Systems</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>Components</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>LED Lighting</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>Off-Road Lighting</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>Accessories</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-               <div class="navBarElement">
-                   <h1>Housings</h1>
-                   <div class="navBarMenu">
-                       <h1></h1>
-                       <img src="" alt="">
-                   </div>
-               </div>
-           </div>
-       </div>
+  <div class="container">
+    <div class="col-lg-6">
+      <div class="logo">
+        <a href="/">
+          <img src="img/logo.png" alt="">
+        </a>
+      </div>
+      <div class="title">
+        <a href="/">
+          <h1>Retrofit Authority</h1>
+          <h2>Automotive Lighting Modification</h2>
+        </a>
+      </div>
     </div>
+    <div class="col-lg-6"></div>
+  </div>
 
+  <div class="container">
+    <!-- NAVBAR -->
+    <div class="row">
+     <div class="col-lg-12">
+      <div class="navBar">
+       <div class="navBarElement">
+         <h1><a href="/retrofitKits">Retrofit Kits</a></h1>
+         <div class="navBarMenu">
+           <h1>Retrofit Kits</h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>HID Systems</h1>
+         <div class="navBarMenu">
+           <h1>HID System</h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>Components</h1>
+         <div class="navBarMenu">
+           <h1></h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>LED Lighting</h1>
+         <div class="navBarMenu">
+           <h1></h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>Off-Road Lighting</h1>
+         <div class="navBarMenu">
+           <h1></h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>Accessories</h1>
+         <div class="navBarMenu">
+           <h1></h1>
+           <img src="" alt="">
+         </div>
+       </div>
+       <div class="navBarElement">
+         <h1>Housings</h1>
+         <div class="navBarMenu">
+           <h1></h1>
+           <img src="" alt="">
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>
 
 <div ng-view></div>
 
+<div class="footer">
+  <div class="container">
+    <div class="col-lg-3">
+      <h1>Information</h1>
+      <h2>About Us</h2>
+      <h2>Warranty Info</h2>
+      <h2>Testimonials</h2>
+    </div>
+    <div class="col-lg-3">
+      <h1>Resources</h1>
+      <h2>Resource 1</h2>
+      <h2>Resource 2</h2>
+      <h2>Resource 3</h2>
+      <h2>Resource 4</h2>
+    </div>
+    <div class="col-lg-3">
+      <h1>Contact</h1>
+      <h2>Form</h2>
+      <h2>Email</h2>
+    </div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-12 footerBottom">
+      <h3> Copyright &copy; Retrofit Authority, Address here, Texas</h3>
+    </div>
+  </div>
+</div>
 </body>
 </html>

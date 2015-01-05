@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="btn-group" data-ng-class="{open: open}">
+		<button class="btn">Filter by Company</button>
+		<button class="btn btn-default dropdown-toggle" data-ng-click="open=!open"><span class="caret"></span>
+
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+			<li><a data-ng-click="checkAll()"><i class="icon-ok-sign"></i>  Check All</a>
+
+			</li>
+			<li><a data-ng-click="brandSelect=[];"><i class="icon-remove-sign"></i>  Uncheck All</a>
+
+			</li>
+			<li class="divider"></li>
+			<li data-ng-repeat="brand in brandList"> <a data-ng-click="setSelectedBrand()">{{brand}}<span data-ng-class="isChecked(brand)"></span></a>
+
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div class="container" style="margin-top:30px;">
+	<div ng-repeat="item in items | brandFilter:brandSelect">
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:0;">
+			<div class="galleryItem">
+				<div class="galleryItemTitle">
+					<h1> {{item.name}} </h1>
+					<h2> Brand </h2>
+				</div>
+				<div class="galleryItemImage">
+					<img src="img/logo.png">
+				</div>
+				<div class="galleryItemDescription">
+					<p ng-repeat="brand in item.brand">{{brand}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

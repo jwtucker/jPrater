@@ -3,34 +3,44 @@
 // grab the Item model we just created
 var Item = require('./models/item');
 
-    module.exports = function(app) {
+    module.exports = function(app,passport) {
 
-        // server routes ===========================================================
-        // handle things like api calls
-        // authentication routes
 
-        // sample api route
         app.get('/api/items', function(req, res) {
-            // use mongoose to get all items in the database
+
             Item.find(function(err, items) {
 
-                // if there is an error retrieving, send the error. 
-                                // nothing after res.send(err) will execute
                 if (err)
                     res.send(err);
 
-                res.json(items); // return all items in JSON format
+                res.json(items); 
             });
         });
 
-        // route to handle creating goes here (app.post)
-        // route to handle delete goes here (app.delete)
+            // process the signup form
+        app.post('/signup', passport.authenticate('local-signup', {
+            successRedirect : '/profile', // redirect to the secure profile section
+            failureRedirect : '/signup', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+        }));
 
-        // frontend routes =========================================================
-        // route to handle all angular requests
+        app.post('/login', passport.authenticate('local-login', {
+            successRedirect : '/profile', // redirect to the secure profile section
+            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+        }));
+
+
         app.get('*', function(req, res) {
-            res.sendfile('./public/views/index.html'); // load our public/index.html file
+            res.sendfile('./public/views/index.html'); 
         });
 
     };
+
+    function isLoggedIn(req,res,next) {
+        if(req.isAuthenticated())
+            return next();
+
+        res.redirect('/');
+    }
 
