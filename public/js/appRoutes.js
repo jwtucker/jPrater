@@ -17,6 +17,11 @@
         .when('/signup', {
             templateUrl: 'views/signup.html',
             controller: 'SignupController'
+        })
+
+        .when('/product/:id',{
+            templateUrl: "views/product.html",
+            controller: "ProductController"
         });
 
 

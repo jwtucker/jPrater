@@ -45,6 +45,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({ secret: "testSecret", saveUninitialized:true, resave:true}));
 app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 // routes ==================================================

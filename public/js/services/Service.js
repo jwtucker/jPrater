@@ -1,5 +1,7 @@
 // public/js/services/Service.js
-angular.module('Service', []).factory('item', ['$http', function($http) {
+angular.module('Service', [])
+
+.factory('item', ['$http', function($http) {
 
     return {
         // call to get all items
@@ -20,4 +22,37 @@ angular.module('Service', []).factory('item', ['$http', function($http) {
         }
     }       
 
-}]);
+}])
+
+.factory("flash", function($rootScope) {
+    var queue = [];
+    var currentMessage = "";
+    var user;
+
+    $rootScope.$on("$routeChangeSuccess", function() {
+        currentMessage = queue[0] || "";
+    });
+
+    return {
+        setMessage: function(message) {
+            queue.push(message);
+        },
+
+        getMessage: function() { 
+            return currentMessage;
+        },
+
+        setUser: function(userName) {
+            user = userName;
+        },
+
+        getUser: function(){
+            if(user) return user;
+            return "No User";
+        }
+    };
+});
+
+
+
+

@@ -1,4 +1,5 @@
-angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope, $http, $location) {
+angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope, $rootScope, $http, $location, flash) {
+	$scope.flash = flash;
 	$scope.brandSelect = [];	
 	var brandList = [];
 	
@@ -13,7 +14,6 @@ angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope,
  				}
 			}
 		}
-		console.log(brandList);
 		$scope.brandList = brandList;
 	})
 	.error(function(items){
@@ -21,7 +21,6 @@ angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope,
 	});
 
 	$scope.path = $location.path();
-	console.log("DING");
 
 	$scope.setSelectedBrand = function(){
 		var brand = this.brand;
@@ -35,12 +34,16 @@ angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope,
 	};
 
 	$scope.isChecked = function (brand) {
-		console.log($scope.brandSelect + "  :  " + brand);
 		if (_.contains($scope.brandSelect, brand)) {
-			console.log("returning");
 			return 'glyphicon-ok';
 		}
 		return false;
 	};
+
+	$scope.setTargetId = function(id){
+		console.log(id);
+		$rootScope.targetId = id;
+		$location.path('/product/' + id)
+	}
 
 });

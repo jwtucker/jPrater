@@ -9,12 +9,22 @@ var Item = require('./models/item');
         app.get('/api/items', function(req, res) {
 
             Item.find(function(err, items) {
-
                 if (err)
                     res.send(err);
-
                 res.json(items); 
             });
+        });
+
+        app.get('/api/items/:item_id', function(req,res){
+            Item.findById(req.params.item_id, function(err,item){
+                if(err) res.send(err);
+                res.json(item);
+            });
+        });
+
+        //Profile Handling
+        app.get('/api/user', isLoggedIn, function(req, res){
+            res.json({user:req.user});
         });
 
             // process the signup form
@@ -35,12 +45,13 @@ var Item = require('./models/item');
             res.sendfile('./public/views/index.html'); 
         });
 
+
+        
+
     };
 
     function isLoggedIn(req,res,next) {
         if(req.isAuthenticated())
             return next();
-
-        res.redirect('/');
     }
 
