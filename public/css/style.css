@@ -159,6 +159,8 @@ a:visited{
 	margin-bottom: 20px;
 }
 
+/*gallery*/
+
 .galleryItem{
 	border:solid;
 	border-width: 2px;
@@ -194,10 +196,12 @@ a:visited{
 .galleryItemTitle{
 	border-bottom:solid;
 	border-width:1px;
+	height: 60px;
 }
 
 .galleryItemImage{
 	width:100%;
+	position: relative;
 }
 
 .galleryItemImage img{
@@ -212,6 +216,77 @@ a:visited{
 	height:100px;
 	overflow:hidden;
 }
+
+.galleryPrice{
+	position: absolute;
+	bottom:-15px;
+	right:0;
+	background-color: #000;
+	color:#F4B350;
+	font-weight:700;
+}
+
+.galleryPrice p{
+	font-family: "Oswald",sans-serif !important;
+	font-size:16px;
+}
+
+/*Product page*/
+
+.productTitle{
+	font-family:"Oswald",sans-serif;
+	border-bottom:solid;
+	border-color:#cccccc;
+	border-width:1px;
+}
+
+.productPrice{
+	font-family: "Oswald",sans-serif;
+	font-weight: 300;
+	color:#F9690E;
+	border-right:solid;
+	border-width:1px;
+	border-color:#cccccc;
+	width: 50%;
+}
+
+.productImage{
+	border-left:solid;
+	border-right:solid;
+	border-width: 1px;
+	border-color:#cccccc;
+}
+
+.productImage img{
+	display: block;
+	width: 80%;
+	margin:0 auto;
+}
+
+.productOptions{
+	border-top:solid;
+	border-color:#cccccc;
+	border-width:1px;
+	padding-top: 15px;
+	height:130px;
+}
+
+.productOptions select{
+	width: 100%;
+}
+
+.productOptions p{
+	margin-bottom: 0;
+	font-family: "Merriweather",serif;
+}
+
+.productDescription{
+	border-top:solid;
+	border-width:1px;
+	border-color:#cccccc;
+}
+
+/*Miscell.*/
 
 .blue{
 	color:blue;
