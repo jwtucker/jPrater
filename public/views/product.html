@@ -1,4 +1,9 @@
 
+<div class="container" ng-if="admin">
+	<button type="button" class="btn btn-warning btn-lg" ng-click="deleteProduct()">
+		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> DELETE ENTRY
+	</button>
+</div>
 <div class="container">
 	<hr>
 	<div class="row">
@@ -15,17 +20,13 @@
 				<h1>$10.00</h1>
 			</div>
 			<div class="productOptions">
-				<div class="col-lg-6">
-					<p>Option</p>
-					<select name="" id=""></select>
-					<p>Option</p>
-					<select name="" id=""></select>
-				</div>
-				<div class="col-lg-6">
-					<p>Option</p>
-					<select name="" id=""></select>
-					<p>Option</p>
-					<select name="" id=""></select>
+				<div ng-repeat="choice in product.choices">
+					<p>{{choice.name}}</p>
+					<select name="" id="">
+						<option ng-repeat="subchoice in choice.subChoices">
+							{{subchoice.choice}} (${{subchoice.price}})
+						</option>
+					</select>
 				</div>
 			</div>
 			<div class="productDescription">

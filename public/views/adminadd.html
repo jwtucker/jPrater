@@ -1,0 +1,29 @@
+<div class="container">
+	<form novalidate class="addForm">
+		Name: <input class="form-control" type="text" ng-model="product.name" /> <br />
+		Type: <select class="form-control" ng-model="product.type">
+		<option value="retrofitkits">Retrofit Kits</option>
+		<option value="hidsystems">Hid Systems</option>
+		<option value="components">Components</option>
+		<option value="ledlighting">LED Lighting</option>
+		<option value="offroadlighting">Off Road Lighting</option>
+		<option value="accessories">Accessories</option>
+		<option value="housings">Housings</option>
+	</select><br/>
+	Price: <input class="form-control" type="number" ng-model="product.price" /> <br />
+	Brand: <input class="form-control" type="text" ng-model="product.brand" /> <br />
+	Description <textarea class="form-control" rows="4" ng-model="product.description"></textarea> <br />
+	<button ng-click="addChoice()" type="button" class="btn btn-warning btn-sm">
+		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD Option
+	</button>
+
+	<div ng-repeat="choice in choices">
+		Option {{$index+1}} name: <input type="text" class="form-control" ng-model="product.choices[$index].name" />
+		Option {{$index+1}} options (separate by commas, include prices):<textarea class="form-control" rows="4" ng-model="product.choices[$index].subChoices"></textarea> <br />
+	</div>
+
+	<input class="form-control" type="submit" ng-click="update(product)" value="Save" />
+</form>
+<pre>product = {{product | json}}</pre>
+<pre>master = {{master | json}}</pre>
+</div>

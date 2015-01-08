@@ -1,2 +1,2 @@
-angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'GalleryCtrl', 'SignupCtrl', 'HeaderCtrl', 'ProductCtrl', "Filters", 'Service']);
+angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'GalleryCtrl', 'SignupCtrl', 'HeaderCtrl', 'ProductCtrl', 'AdminCtrl', "Filters", 'Service']);
 

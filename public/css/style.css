@@ -25,6 +25,10 @@ a:visited{
 	text-align: right;
 }
 
+.form-control{
+	max-width:600px !important;
+}
+
 /*Title*/
 
 .title h1{
@@ -285,6 +289,8 @@ a:visited{
 	border-width:1px;
 	border-color:#cccccc;
 }
+
+/*Admin Styling*/
 
 /*Miscell.*/
 

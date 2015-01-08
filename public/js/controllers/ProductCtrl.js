@@ -1,16 +1,28 @@
-angular.module('ProductCtrl',[]).controller("ProductController",function($scope, $http, $routeParams, flash) {
+angular.module('ProductCtrl',[]).controller("ProductController",function($scope, $http, $routeParams, $location, flash) {
 
 	$scope.id = $routeParams.id;
 
-	$http.get("/api/items/" + $scope.id)
+	console.log($scope.id);
+
+	$http.get("/api/item/" + $scope.id)
 	.success(function(product){
-		console.log("Success!");
 		$scope.product = product;
 	})
 	.error(function(items){
-		console.log("Failed");
 	});
 
+	$http.get('/api/admin/')
+	.success(function(adminObject){
+		$scope.admin = adminObject.admin;
+		console.log($scope.admin);
+	})
+	.error(function(){
+		console.log("failed");
+	});
 
+	$scope.deleteProduct = function(){
+		$http.delete("/api/item/" + $scope.id);
+		$location.path('/');
+	};
 
 });

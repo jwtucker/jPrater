@@ -9,9 +9,39 @@
             controller: 'MainController'
         })
 
-        .when('/retrofitKits',{
+        .when('/retrofitkits',{
         	templateUrl: 'views/gallery.html',
         	controller: 'GalleryController'
+        })
+
+        .when('/hidsystems',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/components',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/ledlighting',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/offroadlighting',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/accessories',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/housings',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
         })
 
         .when('/signup', {
@@ -22,6 +52,16 @@
         .when('/product/:id',{
             templateUrl: "views/product.html",
             controller: "ProductController"
+        })
+
+        .when('/admin/add',{
+            templateUrl: "views/adminadd.html",
+            controller: "AdminController"
+        })
+
+        .when('/admin/edit',{
+            templateUrl: "views/adminedit.html",
+            controller: "AdminController"
         });
 
 
