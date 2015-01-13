@@ -1,4 +1,4 @@
-angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $route, $http, $routeParams, flash) {
+angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $location, $route, $http, $routeParams, flash) {
 
 	$scope.master = {};
 	$scope.choices = [];
@@ -32,7 +32,7 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $ro
 
 		$scope.master = angular.copy(productCopy);
 		$http.post('/api/items',$scope.master);
-        //$route.reload();
+        $location.path('/');
     };
 
     $scope.addChoice = function() {

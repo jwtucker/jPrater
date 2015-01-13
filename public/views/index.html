@@ -46,22 +46,24 @@
     </div>
 
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="logo">
-            <a href="/">
-              <img src="img/logo.png" alt="">
-            </a>
-          </div>
-          <div class="title">
-            <a href="/">
-              <h1>Retrofit Authority</h1>
-              <h2>Automotive Lighting Modification</h2>
-            </a>
-          </div>
+      <div class="col-lg-6">
+        <div class="logo">
+          <a href="/">
+            <img src="img/logo.png" alt="">
+          </a>
         </div>
+        <div class="title">
+          <a href="/">
+            <h1>Retrofit Authority</h1>
+            <h2>Automotive Lighting Modification</h2>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6" style="position:relative;">
+        <div class="headerLogIn">
           <p ng-if="user.user">Logged in as {{user.user.local.email}}. <span ng-click="logOut();" class="linkColor">(Logout?)</span> </p>
-          <p ng-if="!user.user">Not logged in. <a href="/signup" class="linkColor">Sign in or sign up.</a></p>                  
+          <p ng-if="!user.user">Not logged in. <a href="/signup" class="linkColor">Sign in or sign up.</a></p>
+        </div>        
       </div>
     </div>
   </div>

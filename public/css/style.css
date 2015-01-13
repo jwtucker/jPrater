@@ -186,6 +186,12 @@ a:visited{
 	margin-bottom: 20px;
 }
 
+.headerLogIn{
+	position: absolute;
+	right:0;
+	top:95px;
+}
+
 /*gallery*/
 
 .galleryCategories{
@@ -278,18 +284,24 @@ a:visited{
 /*Product page*/
 
 .productTitle{
-	font-family:"Oswald",sans-serif;
 	border-bottom:solid;
-	border-color:#cccccc;
+	border-color:#dddddd;
 	border-width:1px;
+}
+
+.productTitle h1{
+	font-family:"Oswald",sans-serif;
+	font-size:40px;
+	color:#202020;	
 }
 
 .productCategories{
 	width: 100%;
 	border-bottom: solid;
-	border-color:#cccccc;
+	border-color:#dddddd;
 	border-width:1px;
 	padding-bottom: 10px;
+	text-transform: capitalize;
 }
 
 .productCategories h1{
@@ -305,7 +317,7 @@ a:visited{
 	font-weight: 300;
 	color:#F9690E;
 	border-width:1px;
-	border-color:#cccccc;
+	border-color:#dddddd;
 	width: 50%;
 	margin:0;
 	padding:24px 0;
@@ -335,7 +347,7 @@ a:visited{
 	border-left:solid;
 	border-right:solid;
 	border-width: 1px;
-	border-color:#cccccc;
+	border-color:#dddddd;
 }
 
 .productImage img{
@@ -349,7 +361,7 @@ a:visited{
 
 .productOptions{
 	border-top:solid;
-	border-color:#cccccc;
+	border-color:#dddddd;
 	border-width:1px;
 	padding-top: 15px;
 	padding-bottom: 15px;
@@ -360,6 +372,9 @@ a:visited{
 	width: 100%;
 	display:block;
 	text-transform: capitalize;
+	background-color:#E4F1FE;
+	color:#F9690E;
+	font-weight:600;
 }
 
 .productOptions p{
@@ -370,7 +385,29 @@ a:visited{
 .productDescription{
 	border-top:solid;
 	border-width:1px;
-	border-color:#cccccc;
+	border-color:#dddddd;
+}
+
+.productDescription h1{
+	font-family: "Oswald", sans-serif;
+	font-size:40px;
+	border-bottom:solid;
+	border-width:1px;
+	border-color:#f0f0f0;
+}
+
+.productDescription h2{
+	font-family: "Oswald", sans-serif;
+	font-size:25px;
+	color:#1E8BC3;
+	border-bottom:solid;
+	border-width:1px;
+	border-color:#E4F1FE;
+	font-weight:300;
+}
+
+.productDescription p{
+	font-family: "Merriweather", serif;
 }
 
 /*Admin Styling*/
