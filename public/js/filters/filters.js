@@ -1,19 +1,27 @@
-angular.module('Filters', []).filter('brandFilter', [function () {
-    return function (items, brandSelect) {
-        if (!angular.isUndefined(items) && !angular.isUndefined(brandSelect) && brandSelect.length > 0) {
-            var tempItems = [];
-                for (var i = 0; i < items.length; i++){
-                    var item = items[i];
-                    for (var j = 0; j < item.brand.length; j++){
-                        if(_.contains(brandSelect,item.brand[j]) && !(_.contains(tempItems,item))){
-                            tempItems.push(item);
+angular.module('Filters', []).filter('categoryFilter', [function () {
+    return function (items, subOptionList) {
+        var tempItems = [];
+        var isMatched = false;
+        if (!angular.isUndefined(items) && !angular.isUndefined(subOptionList) && subOptionList.length > 0) {
+                for(var i=0; i < items.length; i++){
+                    if(items[i].categories.length == 0) tempItems.push(items[i]); //Outlier Case
+                    for(var j=0; j < items[i].categories.length; j++){
+                        for(var k=0; k < items[i].categories[j].subOptions.length; k++){
+                            if(_.contains(subOptionList[j],items[i].categories[j].subOptions[k])){
+                                isMatched = true;
+                            }
+                            if(subOptionList[j].length == 0) isMatched = true;
+                        }
+                        if(!isMatched) break;
+                        else isMatched = false;
+                        if(j == items[i].categories.length-1){
+                            tempItems.push(items[i]);
                         }
                     }
                 }
             return tempItems;
         }
         else {
-            console.log("Returned else");
             return items;
         }
     };

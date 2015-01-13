@@ -23,10 +23,10 @@ module.exports = function(app,passport) {
         });
     });
 
-    app.delete('/api/item/:item_id', function(req,res){
+    app.delete('/api/item/:item_id', isAdmin, function(req,res){
         console.log("ding!");
         Item.remove({_id: req.params.item_id},
-         function(err, item){
+           function(err, item){
             if(err) res.send(err);
             res.json({message: 'Successfully Deleted'});
         });
@@ -38,8 +38,10 @@ module.exports = function(app,passport) {
         item.type = req.body.type;
         item.brand = req.body.brand;
         item.description = req.body.description;
+        item.longDescription = req.body.longDescription;
         item.price = req.body.price;
         item.choices = req.body.choices;
+        item.categories = req.body.categories;
 
         item.save(function(err) {
             if (err)
@@ -60,7 +62,13 @@ module.exports = function(app,passport) {
 
         app.get('/api/admin', isLoggedIn, function(req,res){
             res.json({admin:req.user.local.admin});
-        })
+        });
+
+        app.get('/api/logout', function(req, res) {
+            req.logout();
+            res.redirect('/');
+        });
+
 
             // process the signup form
             app.post('/signup', passport.authenticate('local-signup', {

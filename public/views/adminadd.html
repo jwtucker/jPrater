@@ -12,14 +12,26 @@
 	</select><br/>
 	Price: <input class="form-control" type="number" ng-model="product.price" /> <br />
 	Brand: <input class="form-control" type="text" ng-model="product.brand" /> <br />
-	Description <textarea class="form-control" rows="4" ng-model="product.description"></textarea> <br />
+	Short Description: <textarea class="form-control" rows="4" ng-model="product.description"></textarea> <br />
+	Long Description: <textarea class="form-control" rows="6" ng-model="product.longDescription"></textarea> <br />
+
 	<button ng-click="addChoice()" type="button" class="btn btn-warning btn-sm">
 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD Option
 	</button>
 
+
 	<div ng-repeat="choice in choices">
 		Option {{$index+1}} name: <input type="text" class="form-control" ng-model="product.choices[$index].name" />
 		Option {{$index+1}} options (separate by commas, include prices):<textarea class="form-control" rows="4" ng-model="product.choices[$index].subChoices"></textarea> <br />
+	</div>
+
+	<button ng-click="addCategory()" type="button" class="btn btn-warning btn-sm">
+		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add Category
+	</button>
+
+	<div ng-repeat="category in categories">
+		Category {{$index+1}} name: <input type="text" class="form-control" ng-model="product.categories[$index].name" />
+		Category {{$index+1}} options (separate by commas):<textarea class="form-control" rows="4" ng-model="product.categories[$index].subOptions"></textarea> <br />
 	</div>
 
 	<input class="form-control" type="submit" ng-click="update(product)" value="Save" />

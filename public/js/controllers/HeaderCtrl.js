@@ -1,4 +1,4 @@
-angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, flash) {
+angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, flash) {
 
 	$scope.user = "No user!";
 
@@ -18,6 +18,12 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 	.error(function(){
 		console.log("failed");
 	});
+
+	$scope.logOut = function(){
+		console.log("BAM");
+		$http.get('/api/logout');
+		window.location.reload();
+	}
 
 	$scope.tagline = 'To the Moon and Back!';
 

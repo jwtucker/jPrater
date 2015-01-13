@@ -35,34 +35,33 @@
 </head>
 <body ng-app="sampleApp">
 
-  <div class="container">
-    <div class="col-lg-6">
-      <div class="logo">
-        <a href="/">
-          <img src="img/logo.png" alt="">
-        </a>
-      </div>
-      <div class="title">
-        <a href="/">
-          <h1>Retrofit Authority</h1>
-          <h2>Automotive Lighting Modification</h2>
-        </a>
-      </div>
+  <div ng-controller="HeaderController">
+    <div class="container adminControlPanel" ng-if="user.user.local.admin">
+      <p>Admin Controls:</p>
+      <a href="/admin/add">
+        <button type="button" class="btn btn-warning btn-lg">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD
+        </button>
+      </a> 
     </div>
-    <div class="col-lg-6" ng-controller="HeaderController"> 
-      <p>{{user.user.local.email}}</p> 
-      <p>{{user.user.local.password}}</p>
-      <div ng-if="user.user.local.admin">
-        <a href="/admin/add">
-          <button type="button" class="btn btn-warning btn-lg">
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD
-          </button>
-        </a> 
-        <a href="admin/edit">
-          <button type="button" class="btn btn-warning btn-lg">
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> EDIT
-          </button>          
-        </a>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="logo">
+            <a href="/">
+              <img src="img/logo.png" alt="">
+            </a>
+          </div>
+          <div class="title">
+            <a href="/">
+              <h1>Retrofit Authority</h1>
+              <h2>Automotive Lighting Modification</h2>
+            </a>
+          </div>
+        </div>
+          <p ng-if="user.user">Logged in as {{user.user.local.email}}. <span ng-click="logOut();" class="linkColor">(Logout?)</span> </p>
+          <p ng-if="!user.user">Not logged in. <a href="/signup" class="linkColor">Sign in or sign up.</a></p>                  
       </div>
     </div>
   </div>
@@ -78,49 +77,49 @@
            <h1>Retrofit Kits</h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/hidsystems">HID Systems</a></h1>
 <!--          <div class="navBarMenu">
            <h1>HID System</h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/components">Components</a></h1>
 <!--          <div class="navBarMenu">
            <h1></h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/ledlighting">LED Lighting</a></h1>
 <!--          <div class="navBarMenu">
            <h1></h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/offroadlighting">Off-Road Lighting</a></h1>
 <!--          <div class="navBarMenu">
            <h1></h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/accessories">Accessories</a></h1>
 <!--          <div class="navBarMenu">
            <h1></h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
        <div class="navBarElement">
          <h1><a href="/housings">Housings</a></h1>
 <!--          <div class="navBarMenu">
            <h1></h1>
            <img src="" alt="">
          </div>
- -->       </div>
+       -->       </div>
      </div>
    </div>
  </div>
