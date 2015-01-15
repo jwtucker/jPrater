@@ -63,10 +63,11 @@ a:visited{
 	display:inline-block;
 	position: relative;
 	margin: 10px 0;
+	width:100%;
 }
 
 .logo img{
-	height: 100px;
+	max-width:100%;
 }
 
 .adminControlPanel{
@@ -189,7 +190,7 @@ a:visited{
 .headerLogIn{
 	position: absolute;
 	right:0;
-	top:95px;
+	top:71px;
 }
 
 /*gallery*/
@@ -208,32 +209,24 @@ a:visited{
 }
 
 .galleryItem{
+	position: relative;
 	border:solid;
 	border-width: 2px;
 	border-color:#efefef;
 	margin: 5px;
+	height:285px;
+	overflow:hidden;
 }
 
 .galleryItem h1{
+	position: absolute;
 	display:inline-block;
 	font-family: "Oswald",sans-serif;
 	font-weight:400;
 	font-size:20px;
 	margin:5px 0;
-	width:70%;
-	padding-left:5px;
-}
-
-.galleryItem h2{
-	position:absolute;
-	display: inline-block;
-	width: 25%;
-	font-family: "Oswald",sans-serif;
-	font-size:14px;
-	text-align: right;
-	margin:0;
-	top:40px;
-	text-transform: capitalize;
+	width:100%;
+	color:#ffffff;
 }
 
 .galleryItem p{
@@ -243,9 +236,12 @@ a:visited{
 }
 
 .galleryItemTitle{
+	position: relative;
 	border-bottom:solid;
 	border-width:1px;
-	height: 52px;
+	background-color: #000;
+	padding:0 10px;
+	height:52px;
 	overflow:hidden;
 }
 
@@ -261,15 +257,17 @@ a:visited{
 }
 
 .galleryItemDescription{
-	border-top:solid;
-	border-width:1px;
-	height:100px;
-	overflow:hidden;
+	position: relative;
+}
+
+.galleryItemDescription p{
+	font-family: "Merriweather",serif;
+	color:#b8b8b8;
 }
 
 .galleryPrice{
 	position: absolute;
-	bottom:-15px;
+	top:-15px;
 	right:0;
 	background-color: #000;
 	color:#F4B350;
@@ -279,6 +277,21 @@ a:visited{
 .galleryPrice p{
 	font-family: "Oswald",sans-serif !important;
 	font-size:16px;
+}
+
+.galleryBrand{
+	position: absolute;
+	top:-15px;
+	left:0;
+	color:#000000;
+	font-weight:700;
+}
+
+.galleryTitleWrapper{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
 }
 
 /*Product page*/
@@ -418,3 +431,6 @@ a:visited{
 	color:blue;
 	font-size:50px;
 }
+
+
+/*Animations*/

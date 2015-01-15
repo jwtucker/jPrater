@@ -5,16 +5,14 @@
 				<button class="btn btn-primary dropdown-toggle" data-ng-click="open=!open">Filter by {{category.name}}</button>
 				<button class="btn btn-primary dropdown-toggle" data-ng-click="open=!open"><span class="caret"></span>			</button>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-					<li><a data-ng-click="setChecked($index)"><i class="icon-ok-sign"></i>  Check All</a>
-		
-					</li>
-					<li><a data-ng-click="setUnchecked($index);"><i class="icon-remove-sign"></i>  Uncheck All</a>
-		
-					</li>
+
+					<li><a data-ng-click="setChecked($index)"><i class="icon-ok-sign"></i>  Check All</a></li>
+					<li><a data-ng-click="setUnchecked($index);"><i class="icon-remove-sign"></i>  Uncheck All</a></li>
 					<li class="divider"></li>
-					<li data-ng-repeat="subOption in category.subOptions"> <a data-ng-click="setSelectedBrand($parent.$index)">{{subOption}}<span data-ng-class="isChecked($parent.$index)"></span></a>
-		
+					<li data-ng-repeat="subOption in category.subOptions"> 
+						<a data-ng-click="setSelectedBrand($parent.$index)">{{subOption}}<span data-ng-class="isChecked($parent.$index)"></span></a>
 					</li>
+
 				</ul>
 			</div>
 			
@@ -26,19 +24,23 @@
 <div class="container" style="margin-top:30px;">
 	<div ng-repeat="item in items | categoryFilter:subOptionList">
 		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:0;">
-			<div class="galleryItem" ng-click="setTargetId(item._id)">
-				<div class="galleryItemTitle">
-					<h1> {{item.name}} </h1>
-					<h2> {{item.brand}} </h2>
-				</div>
+			<div class="galleryItem" ng-click="setTargetId(item._id)" slide-description-up>
 				<div class="galleryItemImage">
 					<img src="img/logo.png">
 					<div class="galleryPrice">
 						<p> {{item.price | currency }} </p>
 					</div>
+					<div class="galleryBrand">
+						<p> {{item.brand}}</p>
+					</div>
 				</div>
-				<div class="galleryItemDescription">
-					<p>{{item.description}}</p>
+				<div class="galleryTitleWrapper">
+					<div class="galleryItemTitle">
+						<h1> {{item.name}} </h1>
+					</div>
+					<div class="galleryItemDescription">
+						<p>{{item.description}}</p>
+					</div>					
 				</div>
 			</div>
 		</div>

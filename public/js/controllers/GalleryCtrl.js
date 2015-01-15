@@ -13,8 +13,8 @@ angular.module('GalleryCtrl',[]).controller("GalleryController",function($scope,
 		console.log("Failed");
 	});
 
-	
 
+	//FILTERING FUNCTIONS
 	$scope.setSelectedBrand = function(index){
 		var subOption = this.subOption;
 		if(_.contains($scope.subOptionList[index],subOption)){

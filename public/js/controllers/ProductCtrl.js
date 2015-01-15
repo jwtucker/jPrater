@@ -2,6 +2,7 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 
 	$scope.id = $routeParams.id;
 	$scope.cost = [];
+	$scope.costTotal = 0;
 
 	console.log($scope.id);
 
@@ -28,7 +29,9 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	};
 
 	$scope.updateTotal = function(){
-		if($scope.cost.length > 0)	$scope.costTotal = $scope.cost.reduce();
+		if($scope.cost.length > 0)	$scope.costTotal = $scope.cost.reduce(function(a,b){
+			return a+b;
+		});
 	}
 
 });

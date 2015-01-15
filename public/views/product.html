@@ -31,7 +31,7 @@
 			<div class="productOptions">
 				<div ng-repeat="choice in product.choices">
 					<p>{{choice.name}}</p>
-					<select ng-model="cost[$index]" ng-options="subChoice.price as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices"></select>
+					<select ng-model="cost[$index]" ng-options="subChoice.price as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices" ng-change="updateTotal()"></select>
 				</div>
 			</div>
 			<div class="productDescription">
@@ -40,3 +40,6 @@
 		</div>
 	</div>
 </div>
+
+{{cost}}
+{{costTotal}}
