@@ -160,6 +160,29 @@ a:visited{
 
 /*Homepage Content*/
 
+.jumbotronCaption{
+	top:12%;
+	left:10%;
+	position: absolute;
+	background-image: url('../img/trans-bg.png');
+	z-index: 999;
+	max-width:26%;
+	padding:0;
+}
+
+.jumbotronCaption h1{
+	font-family: "Oswald",sans-serif;
+	color:white;
+	margin-top:10px;
+	margin-left:8px;
+}
+
+.jumbotronCaption p{
+	font-family: "Merriweather",serif;
+	color:#cccccc;
+	font-size: 18px;
+}
+
 .contentHomepage{
 	position: relative;
 	border-top:solid;
