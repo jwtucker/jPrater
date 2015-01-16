@@ -303,6 +303,7 @@ a:visited{
 }
 
 .galleryBrand{
+	text-transform: capitalize;
 	position: absolute;
 	top:-15px;
 	left:0;
