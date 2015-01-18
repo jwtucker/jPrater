@@ -5,8 +5,8 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 	$scope.product = {};
 	$scope.product.choices = [];
 	$scope.categories = [];
-	$scope.product.categories = [];
-
+	$scope.product.categories = []
+;
 	$scope.update = function(productCopy) {
 
 		for(var i=0; i < productCopy.choices.length; i++){
@@ -30,17 +30,42 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 			productCopy.categories[i].subOptions = optionsTemp;
 		}
 
-		$scope.master = angular.copy(productCopy);
-		$http.post('/api/items',$scope.master);
-        $location.path('/');
-    };
+		// $scope.test = document.getElementById("uploadForm");
+		// console.log($scope.test);
+		// angular.element("#fileUploadSubmit").trigger('click');
 
-    $scope.addChoice = function() {
-    	$scope.choices.push({});
-    }
+		var fd = new FormData();
+		fd.append("uploadedFile", $scope.uploadedFile);
+		$http
+		.post('/api/uploads', fd, {
+			headers:{
+				'Content-Type':undefined
+			},
+			//transformRequest:angular.identity
+		})
+		.success(function(data){
+			productCopy.imageSrc = data.uploadedFile.name;
+			$scope.master = angular.copy(productCopy);
+			$http.post('/api/items',$scope.master);
+			$location.path('/');
+		})
+		.error(function(error){
+			console.log(error);
+		});
 
-    $scope.addCategory = function() {
-    	$scope.categories.push({});
-    }
+		
+	};
+
+	$scope.addChoice = function() {
+		$scope.choices.push({});
+	}
+
+	$scope.addCategory = function() {
+		$scope.categories.push({});
+	}
+
+	$scope.setFile = function (element) {
+		$scope.uploadedFile = element.files[0];
+	}
 
 });

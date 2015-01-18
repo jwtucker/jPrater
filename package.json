@@ -12,6 +12,7 @@
         "bcrypt-nodejs" : "latest",
         "morgan" : "latest",
         "express-session": "latest",
-        "cookie-parser" : "latest"
+        "cookie-parser" : "latest",
+        "multer" : "latest"
       }
     }

@@ -10,6 +10,7 @@ var flash 			= require('connect-flash');
 var morgan			= require('morgan');
 var cookieParser 	= require('cookie-parser');
 var session			= require('express-session');
+var multer 			= require('multer');
 
 // configuration ===========================================
     
@@ -38,6 +39,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public')); 
+
+app.use(multer({dest:'./public/uploads/'}));
 
 
 // NEW STUFF ******************/////////////////////////

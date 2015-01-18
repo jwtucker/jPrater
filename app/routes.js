@@ -6,6 +6,8 @@ var Item = require('./models/item');
 module.exports = function(app,passport) {
 
 
+    //Item Handling
+
     app.get('/api/items/*', function(req, res) {
         var path = req.path;
         path = path.replace("/api/items/","");
@@ -42,6 +44,7 @@ module.exports = function(app,passport) {
         item.price = req.body.price;
         item.choices = req.body.choices;
         item.categories = req.body.categories;
+        item.imageSrc = req.body.imageSrc;
 
         item.save(function(err) {
             if (err)
@@ -49,6 +52,11 @@ module.exports = function(app,passport) {
 
             res.json({message:'Item Created.'});
         });
+    });
+
+    app.post('/api/uploads', isAdmin, function(req, res){
+        console.dir(req.files);
+        res.json(req.files);
     });
 
 
