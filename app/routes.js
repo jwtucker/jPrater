@@ -54,6 +54,18 @@ module.exports = function(app,passport) {
         });
     });
 
+
+    app.put('/api/addToCart', isLoggedIn, function(req,res){
+        req.user.cart.push(req.body.id);
+        console.log(req.user);
+        req.user.save(function(err){
+            if(err) res.send(err);
+            res.json("Item Added to Cart!");
+        });
+    });
+
+    //Admin Controls
+
     app.post('/api/uploads', isAdmin, function(req, res){
         console.dir(req.files);
         res.json(req.files);

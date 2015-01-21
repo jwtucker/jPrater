@@ -34,4 +34,8 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 		});
 	}
 
+	$scope.addToCart = function(){
+		var tempObject = { "id" : $scope.id };
+		$http.put('/api/addToCart', tempObject);
+	}
 });
