@@ -1,0 +1,21 @@
+<div class="container">
+	<table class="table table-striped table-bordered">
+		<tr>
+			<td><strong>Item</strong></td>
+			<td><strong>Options</strong></td>
+			<td><strong>Quantity</strong></td>
+			<td><strong>Total</strong></td>
+			<td></td>
+		</tr>
+		<tr ng-repeat="cartItem in cart">
+			<td><a class="linkColor" ng-href="/product/{{cartItem._id}}">{{cartItem.name}}</a></td>
+			<td><p class="capitalize" ng-repeat="option in user.user.cart[$index].selectedOptions">{{option.selectedOption}}: {{option.choice}} ({{option.price | currency}})</p></td>
+			<td>{{cartItem.quantity}}</td>
+			<td>{{cartItem.price*cartItem.quantity | currency}}</td>
+			<td class="linkColor" ng-click="removeItem(cart[$index])">Remove</td>
+		</tr>
+	</table>
+</div>
+{{user.user.cart}}
+
+{{optionCostTotal}}

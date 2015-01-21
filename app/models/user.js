@@ -12,7 +12,11 @@ var userSchema = mongoose.Schema({
         admin			: {type: Boolean, default: false}
     },
 
-    cart : []
+    cart : [{
+    	id: String, 
+    	quantity: Number,
+    	selectedOptions: [{selectedOption: String, choice: String, price: Number}]
+    }]
 
 });
 

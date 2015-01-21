@@ -17,6 +17,10 @@ a:visited{
 	color:inherit;
 }
 
+table {
+	font-family: "Merriweather",serif !important;
+}
+
 .linkColor{
 	color:#0645AD !important;
 }
@@ -41,6 +45,10 @@ a:visited{
 .vAlignBottom{
 	vertical-align: bottom;
 	height: 100%;
+}
+
+.capitalize{
+	text-transform: capitalize;
 }
 
 /*Title*/
@@ -373,9 +381,22 @@ a:visited{
 	top:-20px;
 }
 
+.productQuantity{
+	display: block;
+	position: absolute;
+	left:40%;
+	margin:0;
+	padding:26px 0;
+	width: 120px;
+}
+
+.productQuantity select{
+	height:100%;
+}
+
 .addToCart{
 	position: relative;
-	left:50%;
+	left:65%;
 	margin:0;
 	width: 45%;
 	padding:20px 0;
@@ -384,7 +405,6 @@ a:visited{
 
 .addToCart button{
 	display: block;
-	margin-left:40px;
 }
 
 .productImage{

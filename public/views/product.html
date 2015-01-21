@@ -23,6 +23,9 @@
 			<div class="productPrice">
 				<h1>{{product.price + costTotal | currency}}</h1>
 			</div>
+			<div class="productQuantity input-group">
+				<input type="number" ng-model="quantity" class="form-control" placeholder="1" />
+			</div>
 			<div class="addToCart">
 				<button type="button" class="btn btn-primary btn-lg" ng-click="addToCart()">
 					<span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD TO CART
@@ -31,7 +34,7 @@
 			<div class="productOptions">
 				<div ng-repeat="choice in product.choices">
 					<p>{{choice.name}}</p>
-					<select ng-model="cost[$index]" ng-options="subChoice.price as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices" ng-change="updateTotal()"></select>
+					<select ng-model="selectedOptions[$index]" ng-options="subChoice as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices" ng-change="updateTotal()"></select>
 				</div>
 			</div>
 			<div class="productDescription">
@@ -40,3 +43,5 @@
 		</div>
 	</div>
 </div>
+
+{{selectedOptions}}

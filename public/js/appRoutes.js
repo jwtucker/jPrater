@@ -62,6 +62,11 @@
         .when('/admin/edit',{
             templateUrl: "views/adminedit.html",
             controller: "AdminController"
+        })
+
+        .when('/user', {
+            templateUrl: "views/user.html",
+            controller: "UserController"
         });
 
 

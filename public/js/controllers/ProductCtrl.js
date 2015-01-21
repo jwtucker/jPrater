@@ -2,9 +2,8 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 
 	$scope.id = $routeParams.id;
 	$scope.cost = [];
+	$scope.selectedOptions = [];
 	$scope.costTotal = 0;
-
-	console.log($scope.id);
 
 	$http.get("/api/item/" + $scope.id)
 	.success(function(product){
@@ -17,7 +16,6 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	$http.get('/api/admin/')
 	.success(function(adminObject){
 		$scope.admin = adminObject.admin;
-		console.log($scope.admin);
 	})
 	.error(function(){
 		console.log("failed");
@@ -29,13 +27,21 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	};
 
 	$scope.updateTotal = function(){
+		for(var i = 0; i < $scope.selectedOptions.length; i++){
+			$scope.selectedOptions[i].selectedOption = $scope.product.choices[i].name;
+			$scope.cost[i] = $scope.selectedOptions[i].price;			
+		}
 		if($scope.cost.length > 0)	$scope.costTotal = $scope.cost.reduce(function(a,b){
 			return a+b;
 		});
 	}
 
 	$scope.addToCart = function(){
-		var tempObject = { "id" : $scope.id };
+		if(parseInt($scope.quantity) < 1 || $scope.quantity == undefined) $scope.quantity = 1;
+		$scope.quantity = parseInt($scope.quantity);
+		var tempObject = { "id" : $scope.id, "quantity" : $scope.quantity , "selectedOptions" : $scope.selectedOptions};
+		console.log(tempObject);
 		$http.put('/api/addToCart', tempObject);
+		$location.path('/user');
 	}
 });

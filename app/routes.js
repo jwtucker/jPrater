@@ -28,7 +28,7 @@ module.exports = function(app,passport) {
     app.delete('/api/item/:item_id', isAdmin, function(req,res){
         console.log("ding!");
         Item.remove({_id: req.params.item_id},
-           function(err, item){
+         function(err, item){
             if(err) res.send(err);
             res.json({message: 'Successfully Deleted'});
         });
@@ -56,11 +56,25 @@ module.exports = function(app,passport) {
 
 
     app.put('/api/addToCart', isLoggedIn, function(req,res){
-        req.user.cart.push(req.body.id);
+        req.user.cart.push(req.body);
         console.log(req.user);
         req.user.save(function(err){
             if(err) res.send(err);
             res.json("Item Added to Cart!");
+        });
+    });
+
+    app.put('/api/removeFromCart', isLoggedIn, function(req,res){
+        console.log(req.body._id);
+        for(i = 0; i < req.user.cart.length; i++){
+            if(req.user.cart[i].id == req.body._id){
+                req.user.cart.splice(i,1);
+                i--;
+            }
+        }
+        req.user.save(function(err){
+            if(err) res.send(err);
+            res.json("Item removed from cart");
         });
     });
 
