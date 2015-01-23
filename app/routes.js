@@ -139,8 +139,8 @@ module.exports = function(app,passport) {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://localhost:8080/user/confirm",
-                "cancel_url": "http://localhost:8080/user"
+                "return_url": config.return_url,
+                "cancel_url": config.cancel_url
             },
             "transactions": [{
                 "item_list": {
