@@ -67,6 +67,11 @@
         .when('/user', {
             templateUrl: "views/user.html",
             controller: "UserController"
+        })
+
+        .when('/user/confirm', {
+            templateUrl: 'views/userconfirm.html',
+            controller: "UserController"
         });
 
 

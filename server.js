@@ -16,6 +16,7 @@ var multer 			= require('multer');
     
 // config files
 var db = require('./config/db');
+var config = require('./config/config');
 require('./config/passport')(passport);
 //  our port
 var port = process.env.PORT || 8080; 
@@ -46,7 +47,7 @@ app.use(multer({dest:'./public/uploads/'}));
 // NEW STUFF ******************/////////////////////////
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(session({ secret: "testSecret", saveUninitialized:true, resave:true}));
+app.use(session({ secret: config.passport_secret, saveUninitialized:true, resave:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

@@ -39,7 +39,7 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	$scope.addToCart = function(){
 		if(parseInt($scope.quantity) < 1 || $scope.quantity == undefined) $scope.quantity = 1;
 		$scope.quantity = parseInt($scope.quantity);
-		var tempObject = { "id" : $scope.id, "quantity" : $scope.quantity , "selectedOptions" : $scope.selectedOptions};
+		var tempObject = { "id" : $scope.id, "name" : $scope.product.name, "quantity" : $scope.quantity , "selectedOptions" : $scope.selectedOptions, "price" : $scope.product.price};
 		console.log(tempObject);
 		$http.put('/api/addToCart', tempObject);
 		$location.path('/user');

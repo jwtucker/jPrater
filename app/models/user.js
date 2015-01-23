@@ -14,6 +14,8 @@ var userSchema = mongoose.Schema({
 
     cart : [{
     	id: String, 
+        name: String,
+        price: Number,
     	quantity: Number,
     	selectedOptions: [{selectedOption: String, choice: String, price: Number}]
     }]

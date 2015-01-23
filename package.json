@@ -13,6 +13,7 @@
         "morgan" : "latest",
         "express-session": "latest",
         "cookie-parser" : "latest",
-        "multer" : "latest"
+        "multer" : "latest",
+        "paypal-rest-sdk" : "latest"
       }
     }
