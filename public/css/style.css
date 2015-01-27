@@ -51,6 +51,11 @@ table {
 	text-transform: capitalize;
 }
 
+.flashMessage{
+	font-family: 'Merriweather',serif;
+	font-size:16px;
+}
+
 /*Title*/
 
 .title h1{
@@ -221,7 +226,14 @@ table {
 .headerLogIn{
 	position: absolute;
 	right:0;
-	top:71px;
+	top:18px;
+	text-align:right;
+	font-family: 'Oswald',sans-serif;
+}
+
+.headerLogIn p{
+	font-family: 'Merriweather',serif;
+	margin-bottom:4px;
 }
 
 /*gallery*/

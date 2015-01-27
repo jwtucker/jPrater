@@ -5,7 +5,8 @@ var Item = require('./models/item');
 var User = require('./models/user');
 var paypal = require('paypal-rest-sdk');
 var config = require('../config/config');
-var transporter = config.transporter;
+var nodemailer = require('nodemailer');
+var crypto = require('crypto');
 
 paypal.configure({
     'mode' : 'sandbox',
@@ -245,11 +246,46 @@ module.exports = function(app,passport) {
     //Mailing routes
     app.put('/api/lostPassword', function(req,res){
         var email = req.body.email;
-        console.log(email);
         User.findOne({'local.email' : email}, function(err,user){
-            if(!user) console.log("User not found");
-            else console.log(user);
+            if(!user) throw("User not found.");
+
+            crypto.randomBytes(20, function(err,buf){
+                var token = buf.toString('hex');
+                user.lostPasswordToken = token;
+                user.lostPasswordExpires = Date.now() + 3600000; //1 Hour
+
+                user.save(function(err){
+                    if(err) throw(err);
+                });
+                var transporter = nodemailer.createTransport(config.transporter);
+                var mailOptions = {
+                    to: email,
+                    from: 'retrofitauthority@gmail.com',
+                    subject: 'Retrofit Authority Password Reset',
+                    text: 'You are receiving this email because you have requested a password reset on Retrofit Authority. If you did not ask for this, please disregard this email. In order to reset the password, please click the following link: \n\n' + config.url + '/reset/' + token
+                }
+                transporter.sendMail(mailOptions, function(err){
+                    if(err) throw(err);
+                });
+                res.json({message: "Email sent!"});
+            });                                
+
+
         })
+    });
+
+    app.put('/api/checkResetKey', function(req,res){
+        User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
+            if(!user) throw("User not found");
+            user.local.password = user.generateHash(req.body.password);
+            user.lostPasswordToken = undefined;
+            user.lostPasswordExpires = undefined;
+            user.save(function(err){
+                if(err) throw(err);
+                console.log("Returning now!?")
+                res.json({message: "Password changed!"});                
+            });
+        });
     });
 
     //Sets index file

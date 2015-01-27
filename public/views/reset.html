@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="col-lg-6">
+
+		<form ng-submit="checkKey()">
+			<div class="form-group">
+				<div class="form-group">
+					<label>Email</label>
+					<input type="text" class="form-control" name="email" ng-model="resetData.email">
+				</div>
+				<hr />
+				<p style="font-family:'Merriweather',serif;">Please enter your new password.</p>
+				<hr />	
+				<label>Password</label>
+				<input type="password" class="form-control" name="password" ng-model="resetData.password">
+			</div>
+			<div class="form-group">
+				<label>Retype Password</label>
+				<input type="password" class="form-control" name="passwordRetype" ng-model="passwordRetype">
+			</div>
+
+			<button type="submit" class="btn btn-warning btn-lg">Reset</button>
+		</form>
+	</div>
+</div>

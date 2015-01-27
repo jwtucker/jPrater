@@ -2,6 +2,7 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 
 	$scope.user = "No user!";
 	$scope.flash = flash;
+	$scope.numberItems = 0;
 
 	$scope.$on('loginEvent',function(){
 		$http.get('/api/user')
@@ -12,6 +13,14 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 			console.log("failed");
 		});
 	});
+
+	$scope.$on('$routeChangeSuccess',function(){
+		$http.get('/api/user')
+		.success(function(user){
+			$scope.user = user;
+		})
+		if($scope.user.user)$scope.updateNumberItems();
+	})
 
 	$http.get('/api/admin')
 	.success(function(adminObject){
@@ -28,6 +37,9 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 		window.location.reload();
 	}
 
-	$scope.tagline = 'To the Moon and Back!';
+	$scope.updateNumberItems = function(){
+		$scope.numberItems = $scope.user.user.cart.length;
+		console.log($scope.numberItems);
+	}
 
 });

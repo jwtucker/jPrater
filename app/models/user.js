@@ -18,7 +18,10 @@ var userSchema = mongoose.Schema({
         price: Number,
     	quantity: Number,
     	selectedOptions: [{selectedOption: String, choice: String, price: Number}]
-    }]
+    }],
+
+    lostPasswordToken   : String,
+    lostPasswordExpires : Date
 
 });
 

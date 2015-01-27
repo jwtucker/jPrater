@@ -15,6 +15,7 @@
         "cookie-parser" : "latest",
         "multer" : "latest",
         "paypal-rest-sdk" : "latest",
-        "nodemailer" : "latest"
+        "nodemailer" : "latest",
+        "crypto" : "latest"
       }
     }

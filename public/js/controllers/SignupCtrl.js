@@ -1,12 +1,13 @@
-angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $http, $location, $route, $rootScope, flash) {
+angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $http, $location, $route, $rootScope, $routeParams, flash) {
 	
 	$scope.flash = flash;
 	$scope.signupData = {};
 	$scope.loginData = {};
 	$scope.lostPasswordData = {};
+	$scope.resetKey = $routeParams.id;
 
 	$scope.processSignup = function(){
-		if($scope.signupData.password != $scope.retypePassword){
+		if($scope.signupData.password != $scope.passwordRetype){
 			$scope.flash.setMessage("Passwords do not match");
 			$rootScope.$broadcast('$routeChangeSuccess');
 		}
@@ -34,7 +35,10 @@ angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $
 				$rootScope.$broadcast('loginEvent');
 				$location.path('/');
 			}
-			if(data.success == false) ;			
+			if(data.success == false) {
+				$rootScope.$broadcast('loginEvent');
+				$location.path('/');				
+			}			
 		})
 		.error(function(){
 			$scope.flash.setMessage("Error with server. Please try again later.");
@@ -52,6 +56,19 @@ angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $
 			$scope.flash.setMessage("Error with server. Please try again later.");
 			$location.path('/');
 		})
+	}
+
+	$scope.checkKey = function(){
+		//Check if passwords match here, set password here
+		$http.put('/api/checkResetKey', {resetKey : $scope.resetKey, email : $scope.resetData.email, password : $scope.resetData.password})
+		.success(function(){
+			$scope.flash.setMessage("Password successfully changed.");
+			$location.path('/');
+		})
+		.error(function(){
+			$scope.flash.setMessage("Error changing password.");
+			$location.path('/');
+		});
 	}
 
 });

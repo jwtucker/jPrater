@@ -74,6 +74,11 @@
             controller:  "SignupController"
         })
 
+        .when('/reset/:id', {
+            templateUrl: "views/reset.html",
+            controller: "SignupController"
+        })
+
         .when('/user/confirm', {
             templateUrl: 'views/userconfirm.html',
             controller: "UserController"
