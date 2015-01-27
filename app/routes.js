@@ -1,9 +1,11 @@
- // app/routes.js
+7 // app/routes.js
 
 // grab the Item model we just created
 var Item = require('./models/item');
+var User = require('./models/user');
 var paypal = require('paypal-rest-sdk');
 var config = require('../config/config');
+var transporter = config.transporter;
 
 paypal.configure({
     'mode' : 'sandbox',
@@ -67,7 +69,8 @@ module.exports = function(app,passport) {
 
     app.put('/api/addToCart', isLoggedIn, function(req,res){
         req.user.cart.push(req.body);
-        console.log(req.user);
+        console.log("User: " + req.user);
+        if(req.user == undefined) console.log("User undefined!");
         req.user.save(function(err){
             if(err) res.send(err);
             res.json("Item Added to Cart!");
@@ -94,11 +97,6 @@ module.exports = function(app,passport) {
 
         console.log(req.body);
 
-    // [ { id: '54bf45ea91340b7d5acdee6a',
-    // quantity: 1,
-    // price: 500,
-    // _id: '54c1b386aff860a4707d72cd',
-    // selectedOptions: [ [selectedOption], [choice], [price] ] } ]
 
         //Query the cart
         var userCart = req.user.cart;
@@ -198,54 +196,76 @@ module.exports = function(app,passport) {
         res.json(req.files);
     });
 
+    //Profile Handling
+    app.get('/api/user', isLoggedIn, function(req, res){
+        res.json({user:req.user});
+    });
 
+    app.get('/api/admin', isLoggedIn, function(req,res){
+        res.json({admin:req.user.local.admin});
+    });
 
+    app.get('/api/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 
+    app.post('/signup', function(req, res, next) {
+        passport.authenticate('local-signup', function(err, user, info) {
+            if (err) {
+                console.log("Throwing 500!");
+                return next(err);
+            }
+            req.logIn(user,function(err){
+                if(err) return next(err);
+                console.log("User Created!");
+                return res.json({ success : true, message : 'Account created!' });                    
+            })
+        })(req, res, next);
+    });
 
-        //Profile Handling
-        app.get('/api/user', isLoggedIn, function(req, res){
-            res.json({user:req.user});
-        });
+    app.post('/login', function(req, res, next) {
+        passport.authenticate('local-login', function(err, user, info) {
+            if (err) {
+                console.log("Throwing 500!");
+                return next(err);
+            }
+            if (! user) {
+                console.log("No User!");
+                return res.json({ success : false, message : 'Username/password combination does not exist.' });
+            }
+            req.logIn(user, function(err){
+                console.log("Auth Succeeded!");
+                if(err) return next(err);
+                return res.json({ success : true, message : 'You have logged in.' });                    
+            })
+        })(req, res, next);
+    });
 
-        app.get('/api/admin', isLoggedIn, function(req,res){
-            res.json({admin:req.user.local.admin});
-        });
+    //Mailing routes
+    app.put('/api/lostPassword', function(req,res){
+        var email = req.body.email;
+        console.log(email);
+        User.findOne({'local.email' : email}, function(err,user){
+            if(!user) console.log("User not found");
+            else console.log(user);
+        })
+    });
 
-        app.get('/api/logout', function(req, res) {
-            req.logout();
-            res.redirect('/');
-        });
+    //Sets index file
+    app.get('*', function(req, res) {
+        res.sendfile('./public/views/index.html'); 
+    });
+};
 
+    function isLoggedIn(req,res,next) {
+        if(req.isAuthenticated())
+            return next();
+        else
+            throw("User not logged in");
+    }
 
-            // process the signup form
-            app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
-
-            app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
-
-
-            app.get('*', function(req, res) {
-                res.sendfile('./public/views/index.html'); 
-            });
-
-
-
-
-        };
-
-        function isLoggedIn(req,res,next) {
-            if(req.isAuthenticated())
-                return next();
-        }
-
-        function isAdmin(req,res,next) {
-            if(req.user.local.admin == true) return next();
-        }
+    function isAdmin(req,res,next) {
+        if(req.user.local.admin == true) return next();
+    }
 

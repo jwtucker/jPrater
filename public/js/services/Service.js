@@ -30,7 +30,7 @@ angular.module('Service', [])
     var user;
 
     $rootScope.$on("$routeChangeSuccess", function() {
-        currentMessage = queue[0] || "";
+        currentMessage = queue.shift() || "";
     });
 
     return {

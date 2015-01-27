@@ -1,13 +1,16 @@
 angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, flash) {
 
 	$scope.user = "No user!";
+	$scope.flash = flash;
 
-	$http.get('/api/user')
-	.success(function(user){
-		$scope.user = user;
-	})
-	.error(function(){
-		console.log("failed");
+	$scope.$on('loginEvent',function(){
+		$http.get('/api/user')
+		.success(function(user){
+			$scope.user = user;
+		})
+		.error(function(){
+			console.log("failed");
+		});
 	});
 
 	$http.get('/api/admin')

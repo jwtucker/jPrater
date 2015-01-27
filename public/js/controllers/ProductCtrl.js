@@ -1,5 +1,7 @@
 angular.module('ProductCtrl',[]).controller("ProductController",function($scope, $sce, $http, $routeParams, $location, flash) {
 
+	$scope.flash = flash;
+
 	$scope.id = $routeParams.id;
 	$scope.cost = [];
 	$scope.selectedOptions = [];
@@ -41,7 +43,17 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 		$scope.quantity = parseInt($scope.quantity);
 		var tempObject = { "id" : $scope.id, "name" : $scope.product.name, "quantity" : $scope.quantity , "selectedOptions" : $scope.selectedOptions, "price" : $scope.product.price};
 		console.log(tempObject);
-		$http.put('/api/addToCart', tempObject);
-		$location.path('/user');
+		$http.put('/api/addToCart', tempObject)
+		.success(function(){
+			console.log("success");
+			$scope.flash.setMessage("Item added to cart.");
+			$location.path('/user');	
+		})
+		.error(function(){
+			console.log("error");
+			$scope.flash.setMessage("Please log in to add to add items to cart.");
+			$location.path('/signup');
+		});
+
 	}
 });

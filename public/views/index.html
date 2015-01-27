@@ -36,10 +36,12 @@
 
 </head>
 <body ng-app="sampleApp">
-  
+
   <div class="well">
     This site is for test purposes only. None of the products shown are for sale and are here only for test purposes. We will be with you soon for all of your modding needs.
   </div>
+
+
 
   <div ng-controller="HeaderController">
     <div class="container adminControlPanel" ng-if="user.user.local.admin">
@@ -64,7 +66,7 @@
             <h2>Automotive Lighting Modification</h2>
           </a>
         </div>
- -->      </div>
+      -->      </div>
       <div class="col-lg-6" style="position:relative;">
         <div class="headerLogIn">
           <p ng-if="user.user">Logged in as {{user.user.local.email}}. <span ng-click="logOut();" class="linkColor">(Logout?)</span> </p>
@@ -72,7 +74,8 @@
         </div>        
       </div>
     </div>
-  </div>
+
+  
 
   <div class="container">
     <!-- NAVBAR -->
@@ -131,7 +134,14 @@
      </div>
    </div>
  </div>
+
+ <div ng-show="flash.getMessage()" class="well">
+  {{flash.getMessage()}}
 </div>
+</div>
+</div>
+
+
 
 <div ng-view></div>
 

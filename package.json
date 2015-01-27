@@ -14,6 +14,7 @@
         "express-session": "latest",
         "cookie-parser" : "latest",
         "multer" : "latest",
-        "paypal-rest-sdk" : "latest"
+        "paypal-rest-sdk" : "latest",
+        "nodemailer" : "latest"
       }
     }

@@ -1,6 +1,7 @@
-angular.module('UserCtrl',[]).controller("UserController",function($scope, $route, $http, $location, $window) {
+angular.module('UserCtrl',[]).controller("UserController",function($scope, $route, $http, $location, flash, $window) {
 	$scope.cart = [];
 	$scope.optionCostTotal = [];
+	$scope.flash = flash;
 
 	$http.get('/api/user')
 	.success(function(user){

@@ -69,6 +69,11 @@
             controller: "UserController"
         })
 
+        .when('/lostpassword',{
+            templateUrl: "views/lostpassword.html",
+            controller:  "SignupController"
+        })
+
         .when('/user/confirm', {
             templateUrl: 'views/userconfirm.html',
             controller: "UserController"
