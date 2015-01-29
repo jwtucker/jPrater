@@ -287,6 +287,23 @@ module.exports = function(app,passport) {
         });
     });
 
+
+    //Footer functions
+
+    app.put('/api/contact', function(req,res){
+        var transporter = nodemailer.createTransport(config.transporter);
+        var mailOptions = {
+            to: 'justin.prater@ymail.com, tuckerjeremyw@gmail.com',
+            from: req.body.email,
+            subject: 'Message on Retrofit Authority from ' + req.body.email,
+            text: "Reply to: " + req.body.email + "\n\n\n" + req.body.message
+        }
+        transporter.sendMail(mailOptions, function(err){
+            if(err) throw(err);
+        });
+        res.json({message: "Message Sent."})
+    });
+
     //Sets index file
     app.get('*', function(req, res) {
         res.sendfile('./public/views/index.html'); 

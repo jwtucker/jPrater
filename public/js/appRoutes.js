@@ -82,6 +82,13 @@
         .when('/user/confirm', {
             templateUrl: 'views/userconfirm.html',
             controller: "UserController"
+        })
+
+        //Footer Content
+
+        .when('/contact', {
+            templateUrl: 'views/contact.html',
+            controller: 'MainController'
         });
 
 
