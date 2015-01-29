@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var navBarShown = 0;
 
 	$(".navBarElement").hover(function(){
 		$(this).find('div').show();
@@ -14,7 +15,19 @@ $(document).ready(function(){
 
 	$(".mobileNavBar").click(function(){
 		$(".navBar").stop().slideDown();
-	})
+		navBarShown = 1;
+	});
+
+	$(document).mouseup(function (e)
+	{
+		var container = $(".navBar");
+
+    if (!container.is(e.target) // if the target of the click isn't the container...
+        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+    	container.stop().slideUp();
+    }
+});
 
 });
 

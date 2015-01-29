@@ -56,12 +56,7 @@ table {
 	font-size:16px;
 }
 
-.mobileNavBar{
-	display:none;
-	background-color: black;
-	width: 100%;
-	height: 44px;
-}
+
 
 /*Title*/
 
@@ -141,6 +136,36 @@ table {
 
 .navBarMenu h1{
 	color:black;
+}
+
+.mobileNavBar{
+	display:none;
+	text-align: right;
+	background-color: black;
+	width: 100%;
+	height: 44px;
+	font-family: 'Oswald',sans-serif;
+}
+
+.mobileNavBar:hover{
+	cursor:hand;
+	cursor:pointer;
+}
+
+.mobileNavBar h1{
+	color:white;
+	font-size:25px;
+	font-weight:700;
+	padding:7px;
+	padding-right:35px;
+	margin:0;
+}
+
+.mobileNavBar span{
+	position: absolute;
+	font-size:22px;
+	top:6px;
+	right:22px;
 }
 
 /*FOOTER*/
@@ -562,12 +587,13 @@ table {
 	}
 
 	.contentHomepage img{
-		max-width:250px;
+		max-width:320px;
 		display:block;
 		margin:0 auto;
 	}
 
 	.navBar{
+		display:none;
 		position: absolute;
 		width: 200px;
 		right:15px;
