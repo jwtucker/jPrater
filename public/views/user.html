@@ -15,7 +15,7 @@
 			<td class="linkColor" ng-click="removeItem(cart[$index])">Remove</td>
 		</tr>
 	</table>
-	<button type="button" class="btn btn-warning btn-lg" ng-click="checkout()" >
+	<button type="button" class="btn btn-warning btn-lg" ng-click="checkout()" ng-if="cart.length">
 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Checkout with Paypal
 	</button>
 	<div class="well" style="margin-top:40px" ng-if="!cart.length">
