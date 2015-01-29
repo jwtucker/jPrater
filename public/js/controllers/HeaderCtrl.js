@@ -1,4 +1,4 @@
-angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, flash) {
+angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, $rootScope, $timeout, flash) {
 
 	$scope.user = "No user!";
 	$scope.flash = flash;
@@ -41,5 +41,11 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 		$scope.numberItems = $scope.user.user.cart.length;
 		console.log($scope.numberItems);
 	}
+
+	$scope.updateOnLoad = function(){
+		$rootScope.$broadcast('$routeChangeSuccess');
+	}
+
+	$scope.updateOnLoad();
 
 });

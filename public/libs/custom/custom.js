@@ -23,11 +23,18 @@ $(document).ready(function(){
 		var container = $(".navBar");
 
     if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    	&& container.has(e.target).length === 0
+        && $(window).width() < 992) // ... nor a descendant of the container
     {
     	container.stop().slideUp();
     }
-});
+	});
+
+	$(window).resize(function(){
+		if($(window).width() > 992){
+			$(".navBar").show();
+		}
+	});
 
 });
 

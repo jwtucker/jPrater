@@ -593,7 +593,6 @@ table {
 	}
 
 	.navBar{
-		display:none;
 		position: absolute;
 		width: 200px;
 		right:15px;

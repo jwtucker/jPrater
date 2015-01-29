@@ -49,7 +49,7 @@ angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $
 	$scope.processLostPassword = function(){
 		$http.put('/api/lostPassword', {email: $scope.lostPasswordData.email})
 		.success(function(){
-			$scope.flash.setMessage("If that account exists, and email has been sent.");
+			$scope.flash.setMessage("If that account exists, an email has been sent.");
 			$location.path('/');
 		})
 		.error(function(){

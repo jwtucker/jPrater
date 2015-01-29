@@ -129,8 +129,7 @@ module.exports = function(app,passport) {
             total = total + (items[i].price * items[i].quantity);
         }
 
-        console.log(items);
-        console.log(total);
+        if(total == 0) throw("ZERO TOTAL");
 
         var createPayment = {
             "intent": "authorize",

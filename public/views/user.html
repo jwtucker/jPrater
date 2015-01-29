@@ -1,5 +1,5 @@
 <div class="container">
-	<table class="table table-striped table-bordered">
+	<table class="table table-striped table-bordered" ng-if="cart.length">
 		<tr>
 			<td><strong>Item</strong></td>
 			<td><strong>Options</strong></td>
@@ -15,7 +15,11 @@
 			<td class="linkColor" ng-click="removeItem(cart[$index])">Remove</td>
 		</tr>
 	</table>
-	<button type="button" class="btn btn-warning btn-lg" ng-click="checkout()">
+	<button type="button" class="btn btn-warning btn-lg" ng-click="checkout()" >
 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Checkout with Paypal
 	</button>
+	<div class="well" style="margin-top:40px" ng-if="!cart.length">
+		<h1 style="font-family:'Oswald',sans-serif; text-align:center; color:red">There are no items in the cart!</h1>
+	</div>
 </div>
+

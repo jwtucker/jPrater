@@ -2,7 +2,7 @@
 	<div class="galleryCategories">
 		<div ng-repeat="category in outCategories">
 			<div class="btn-group" data-ng-class="{open: open}" role="group">
-				<button class="btn btn-primary dropdown-toggle" data-ng-click="open=!open">Filter by {{category.name}}</button>
+				<button class="btn btn-primary dropdown-toggle" data-ng-click="open=!open">Filter by <span class="capitalize">{{category.name}}</span></button>
 				<button class="btn btn-primary dropdown-toggle" data-ng-click="open=!open"><span class="caret"></span>			</button>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 
