@@ -12,5 +12,9 @@ $(document).ready(function(){
 		$(this).hide();
 	});
 
+	$(".mobileNavBar").click(function(){
+		$(".navBar").stop().slideDown();
+	})
+
 });
 

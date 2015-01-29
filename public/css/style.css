@@ -56,6 +56,13 @@ table {
 	font-size:16px;
 }
 
+.mobileNavBar{
+	display:none;
+	background-color: black;
+	width: 100%;
+	height: 44px;
+}
+
 /*Title*/
 
 .title h1{
@@ -171,14 +178,14 @@ table {
 	padding-top: 6px
 }
 
-/*Homepage Content*/
+/* Content*/
 
 .jumbotronCaption{
 	top:12%;
 	left:10%;
 	position: absolute;
 	background-image: url('../img/trans-bg.png');
-	z-index: 999;
+	z-index: 900;
 	max-width:26%;
 	padding:0;
 }
@@ -497,3 +504,153 @@ table {
 
 
 /*Animations*/
+
+
+
+
+
+
+/*Media Width Queries*/
+
+
+/*XS*/
+@media (max-width: 768px) { 
+
+	.jumbotronCaption{
+		max-width:55%;
+	}
+
+	.jumbotronCaption h1{
+		font-size:14px;
+	}
+
+	.jumbotronCaption p{
+		font-size:10px;
+	}
+
+	.galleryItem{
+		max-width:400px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	.productQuantity{
+		left:50%;
+	}
+
+	.addToCart{
+		top:60px;
+		left:0px;
+		height: 140px;
+	}
+
+	.headerLogIn{
+		position: relative;
+		height:130px;
+		padding:0;
+		margin:0;
+		text-align: center;
+		border-top:solid;
+		border-width:1px;
+		border-color:#d0d0d0;
+		padding-top:20px;
+	}
+
+	.hidden-on-xs{
+		display:none;
+		height: 0;
+	}
+
+	.contentHomepage img{
+		max-width:250px;
+		display:block;
+		margin:0 auto;
+	}
+
+	.navBar{
+		position: absolute;
+		width: 200px;
+		right:15px;
+		z-index: 999;
+	}
+
+	.navBarElement{
+		display: block;
+		padding:8px;
+		text-align: right;
+	}
+
+	.navBarElement h1{
+		font-size:24px;
+	}
+
+	.mobileNavBar{
+		display:block;
+	}
+
+}
+
+
+/*SM*/
+@media (min-width: 769px) and (max-width: 992px) {
+
+	.headerLogIn{
+		top:3px;
+	}
+
+	.headerLogIn>a>button{
+		padding:4px 10px;
+		margin:0 auto;
+	}
+
+	.navBar{
+		display:none;
+		position: absolute;
+		width: 200px;
+		right:15px;
+		z-index: 999;
+	}
+
+	.navBarElement{
+		display: block;
+		padding:8px;
+		text-align: right;
+	}
+
+	.navBarElement h1{
+		font-size:24px;
+	}
+
+	.mobileNavBar{
+		display:block;
+	}
+
+}
+
+
+
+/*MD*/
+@media (min-width: 993px) and (max-width: 1200px) {
+
+	.productQuantity{
+		left:34%;
+	}
+
+	.addToCart{
+		left:61%;
+	}
+
+	.headerLogIn{
+		top:6px;
+	}
+
+	.navBarElement{
+		padding:12px 18px;
+	}
+
+	.navBarElement h1{
+		font-size:19px;
+		margin-bottom:1px;
+	}
+
+}

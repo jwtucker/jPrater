@@ -54,20 +54,14 @@
     </div>
 
     <div class="container">
-      <div class="col-lg-6">
+      <div class="col-sm-6">
         <div class="logo">
           <a href="/">
             <img src="img/logo2.png" alt="">
           </a>
         </div>
-<!--         <div class="title">
-          <a href="/">
-            <h1>Retrofit Authority</h1>
-            <h2>Automotive Lighting Modification</h2>
-          </a>
-        </div>
-      -->      </div>
-      <div class="col-lg-6" style="position:relative;">
+      </div>
+      <div class="col-sm-6" style="position:relative;">
         <div class="headerLogIn">
           <p ng-if="user.user">Logged in as {{user.user.local.email}}. <span ng-click="logOut();" class="linkColor">(Logout?)</span> </p>
           <p ng-if="!user.user">Not logged in. <a href="/signup" class="linkColor">Sign in or sign up.</a></p>
@@ -86,6 +80,7 @@
       <!-- NAVBAR -->
       <div class="row">
        <div class="col-lg-12">
+        <div class="mobileNavBar"></div>
         <div class="navBar">
          <div class="navBarElement">
            <h1><a href="/retrofitkits">Retrofit Kits</a></h1>
@@ -152,26 +147,26 @@
 
 <div class="footer">
   <div class="container">
-    <div class="col-lg-3">
+    <div class="col-sm-4">
       <h1>Information</h1>
       <h2>About Us</h2>
       <h2>Warranty Info</h2>
       <h2>Testimonials</h2>
     </div>
-    <div class="col-lg-3">
+    <div class="col-sm-4">
       <h1>Resources</h1>
       <h2>Resource 1</h2>
       <h2>Resource 2</h2>
       <h2>Resource 3</h2>
       <h2>Resource 4</h2>
     </div>
-    <div class="col-lg-3">
+    <div class="col-sm-4">
       <h1>Contact</h1>
       <h2>Form</h2>
       <h2>Email</h2>
     </div>
     <div class="col-lg-3"></div>
-    <div class="col-lg-12 footerBottom">
+    <div class="col-sm-12 footerBottom">
       <h3> Copyright &copy; Retrofit Authority, Address here, Texas</h3>
     </div>
   </div>
