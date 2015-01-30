@@ -7,6 +7,8 @@ var paypal = require('paypal-rest-sdk');
 var config = require('../config/config');
 var nodemailer = require('nodemailer');
 var crypto = require('crypto');
+var gm = require('gm');
+var fs = require('fs');
 
 paypal.configure({
     'mode' : 'sandbox',
@@ -15,7 +17,6 @@ paypal.configure({
 });
 
 module.exports = function(app,passport) {
-
 
     //Item Handling
 
@@ -39,7 +40,7 @@ module.exports = function(app,passport) {
     app.delete('/api/item/:item_id', isAdmin, function(req,res){
         console.log("ding!");
         Item.remove({_id: req.params.item_id},
-           function(err, item){
+         function(err, item){
             if(err) res.send(err);
             res.json({message: 'Successfully Deleted'});
         });
@@ -171,30 +172,37 @@ module.exports = function(app,passport) {
         });
     });
 
-    app.put('/api/confirmOrder', isLoggedIn, function(req, res){
-        paymentId = req.body.paymentId;
-        payerId = req.body.payerId;
-        console.log("Payment ID: " + paymentId);
-        paypal.payment.execute(paymentId, { "payer_id" : payerId }, function (error, payment) {
-            if (error) {
-                console.log(error.response);
-                throw error;
-            }
-            else {
-                console.log("Get Payment Response");
-                console.log(JSON.stringify(payment));
-                res.json({message: "Payment Completed!"})
-            }
-        });
+app.put('/api/confirmOrder', isLoggedIn, function(req, res){
+    paymentId = req.body.paymentId;
+    payerId = req.body.payerId;
+    console.log("Payment ID: " + paymentId);
+    paypal.payment.execute(paymentId, { "payer_id" : payerId }, function (error, payment) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        }
+        else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.json({message: "Payment Completed!"})
+        }
     });
+});
 
 
     //Admin Routes
 
     app.post('/api/uploads', isAdmin, function(req, res){
         console.dir(req.files);
+        console.log('../' + req.files.uploadedFile.path);
+        console.log(fs.readdirSync('public'));
+        gm(req.files.uploadedFile.path)
+        .resize(500)
+        .write(req.files.uploadedFile.path,function(err){
+            if(err) throw(err);
+        });
         res.json(req.files);
-    });
+});
 
     //Profile Handling
     app.get('/api/user', isLoggedIn, function(req, res){
@@ -270,22 +278,22 @@ module.exports = function(app,passport) {
             });                                
 
 
-        })
-    });
+})
+});
 
-    app.put('/api/checkResetKey', function(req,res){
-        User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
-            if(!user) throw("User not found");
-            user.local.password = user.generateHash(req.body.password);
-            user.lostPasswordToken = undefined;
-            user.lostPasswordExpires = undefined;
-            user.save(function(err){
-                if(err) throw(err);
-                console.log("Returning now!?")
-                res.json({message: "Password changed!"});                
-            });
+app.put('/api/checkResetKey', function(req,res){
+    User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
+        if(!user) throw("User not found");
+        user.local.password = user.generateHash(req.body.password);
+        user.lostPasswordToken = undefined;
+        user.lostPasswordExpires = undefined;
+        user.save(function(err){
+            if(err) throw(err);
+            console.log("Returning now!?")
+            res.json({message: "Password changed!"});                
         });
     });
+});
 
 
     //Footer functions
@@ -310,14 +318,14 @@ module.exports = function(app,passport) {
     });
 };
 
-    function isLoggedIn(req,res,next) {
-        if(req.isAuthenticated())
-            return next();
-        else
-            throw("User not logged in");
-    }
+function isLoggedIn(req,res,next) {
+    if(req.isAuthenticated())
+        return next();
+    else
+        throw("User not logged in");
+}
 
-    function isAdmin(req,res,next) {
-        if(req.user.local.admin == true) return next();
-    }
+function isAdmin(req,res,next) {
+    if(req.user.local.admin == true) return next();
+}
 

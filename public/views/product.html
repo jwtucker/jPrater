@@ -34,7 +34,7 @@
 			<div class="productOptions">
 				<div ng-repeat="choice in product.choices">
 					<p>{{choice.name}}</p>
-					<select ng-model="selectedOptions[$index]" ng-options="subChoice as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices" ng-change="updateTotal()"></select>
+					<select ng-model="selectedOptions[$index]" ng-init="selectedOptions[$index]=choice.subChoices[0]" ng-options="subChoice as (subChoice.choice + ' ($' + subChoice.price + ')') for subChoice in choice.subChoices" ng-change="updateTotal()"></select>
 				</div>
 			</div>
 			<div class="productDescription">

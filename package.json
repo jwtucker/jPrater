@@ -16,6 +16,7 @@
         "multer" : "latest",
         "paypal-rest-sdk" : "latest",
         "nodemailer" : "latest",
-        "crypto" : "latest"
+        "crypto" : "latest",
+        "gm" : "latest"
       }
     }
