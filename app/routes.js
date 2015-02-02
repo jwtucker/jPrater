@@ -1,4 +1,4 @@
-7 // app/routes.js
+ // app/routes.js
 
 // grab the Item model we just created
 var Item = require('./models/item');
@@ -219,6 +219,7 @@ app.put('/api/confirmOrder', isLoggedIn, function(req, res){
     });
 
     app.post('/signup', function(req, res, next) {
+        console.log(req.body.newsletter);
         passport.authenticate('local-signup', function(err, user, info) {
             if (err) {
                 console.log("Throwing 500!");
@@ -227,7 +228,11 @@ app.put('/api/confirmOrder', isLoggedIn, function(req, res){
             req.logIn(user,function(err){
                 if(err) return next(err);
                 console.log("User Created!");
-                return res.json({ success : true, message : 'Account created!' });                    
+                req.user.local.newsletter = req.body.newsletter;
+                req.user.save(function(err){
+                    if(err) throw(err);
+                    return res.json({ success : true, message : 'Account created!' });                    
+                });
             })
         })(req, res, next);
     });

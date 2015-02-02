@@ -56,6 +56,29 @@ table {
 	font-size:16px;
 }
 
+.genericSection h1{
+	font-family: "Oswald", sans-serif;
+	font-size:40px;
+	border-bottom:solid;
+	border-width:1px;
+	border-color:#f0f0f0;
+}
+
+.genericSection h2{
+	font-family: "Oswald", sans-serif;
+	font-size:25px;
+	color:#1E8BC3;
+	border-bottom:solid;
+	border-width:1px;
+	border-color:#E4F1FE;
+	font-weight:300;
+}
+
+.genericSection p{
+	font-family: "Merriweather",serif;
+	font-size:14px;
+	color:#686868;
+}
 
 
 /*Title*/

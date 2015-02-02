@@ -2,6 +2,7 @@ angular.module('SignupCtrl',[]).controller("SignupController",function($scope, $
 	
 	$scope.flash = flash;
 	$scope.signupData = {};
+	$scope.signupData.newsletter = false;
 	$scope.loginData = {};
 	$scope.lostPasswordData = {};
 	$scope.resetKey = $routeParams.id;

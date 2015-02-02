@@ -51,6 +51,7 @@ angular.module('UserCtrl',[]).controller("UserController",function($scope, $rout
 
 		$http.put('/api/confirmOrder', {"paymentId" : paymentId, "payerId" : payerId})
 		.success(function(){
+			flash.setMessage("Order confirmed, you should receive an email shortly.");
 			$location.path('/');
 		});
 	}

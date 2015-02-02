@@ -9,6 +9,21 @@
             controller: 'MainController'
         })
 
+        .when('/aboutus', {
+            templateUrl: 'views/aboutus.html',
+            controller: 'MainController'
+        })
+
+        .when('/policies', {
+            templateUrl: 'views/policies.html',
+            controller: 'MainController'
+        })
+
+        .when('/testimonials', {
+            templateUrl: 'views/testimonials.html',
+            controller: 'MainController'
+        })        
+
         .when('/retrofitkits',{
         	templateUrl: 'views/gallery.html',
         	controller: 'GalleryController'
@@ -82,6 +97,11 @@
         .when('/user/confirm', {
             templateUrl: 'views/userconfirm.html',
             controller: "UserController"
+        })
+
+        .when('/admin/send', {
+            templateUrl: 'views/adminsend.html',
+            controller: 'AdminController'
         })
 
         //Footer Content

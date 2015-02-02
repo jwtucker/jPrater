@@ -5,8 +5,8 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 	$scope.product = {};
 	$scope.product.choices = [];
 	$scope.categories = [];
-	$scope.product.categories = []
-;
+	$scope.product.categories = [];
+
 	$scope.update = function(productCopy) {
 
 		for(var i=0; i < productCopy.choices.length; i++){

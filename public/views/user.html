@@ -18,6 +18,7 @@
 	<button type="button" class="btn btn-warning btn-lg" ng-click="checkout()" ng-if="cart.length">
 		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Checkout with Paypal
 	</button>
+	<span class="genericSection" ng-if="cart.length"><p>To continue shopping, please click on a category above.</p></span>
 	<div class="well" style="margin-top:40px" ng-if="!cart.length">
 		<h1 style="font-family:'Oswald',sans-serif; text-align:center; color:red">There are no items in the cart!</h1>
 	</div>

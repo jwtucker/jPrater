@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     local            : {
         email        	: String,
         password     	: String,
-        admin			: {type: Boolean, default: false}
+        admin			: {type: Boolean, default: false},
+        newsletter      : Boolean
     },
 
     cart : [{
@@ -22,6 +23,8 @@ var userSchema = mongoose.Schema({
 
     lostPasswordToken   : String,
     lostPasswordExpires : Date
+
+    
 
 });
 
