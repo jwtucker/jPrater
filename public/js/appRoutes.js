@@ -21,8 +21,18 @@
 
         .when('/testimonials', {
             templateUrl: 'views/testimonials.html',
-            controller: 'MainController'
-        })        
+            controller: 'TestimonialController'
+        })
+
+        .when('/testimonials/submit', {
+            templateUrl: 'views/testimonialsubmit.html',
+            controller: 'TestimonialController'
+        })
+
+        .when('/testimonials/approve', {
+            templateUrl: 'views/testimonialapprove.html',
+            controller: 'TestimonialController'
+        })
 
         .when('/retrofitkits',{
         	templateUrl: 'views/gallery.html',

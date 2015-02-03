@@ -1,4 +1,4 @@
-var myApp = angular.module('sampleApp', ['ngRoute', 'ngAnimate', 'appRoutes', 'MainCtrl', 'GalleryCtrl', 'SignupCtrl', 'HeaderCtrl', 'ProductCtrl', 'AdminCtrl', 'UserCtrl', "Filters", 'Service']);
+var myApp = angular.module('sampleApp', ['ngRoute', 'ngAnimate', 'appRoutes', 'MainCtrl', 'GalleryCtrl', 'SignupCtrl', 'HeaderCtrl', 'ProductCtrl', 'AdminCtrl', 'UserCtrl', 'TestimonialCtrl', "Filters", 'Service']);
 
 
 

@@ -1,10 +1,11 @@
 <div class="container">
 	<div class="genericSection">
-		<h1>Customer Testimonials</h1>
 		<div ng-repeat="testimonial in testimonials">
 			<h2>{{testimonial.name}}</h2>
 			<p>{{testimonial.testimonial}}</p>
-			<p>-{{testimonial.date}}</p>
+			<p>{{testimonial.date}}</p>
+			<button ng-click="approveTestimonial(testimonial._id,true)">Approve</button>
+			<button ng-click="approveTestimonial(testimonial._id,false)">Delete</button>
 		</div>
 	</div>
 </div>

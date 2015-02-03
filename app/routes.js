@@ -3,6 +3,7 @@
 // grab the Item model we just created
 var Item = require('./models/item');
 var User = require('./models/user');
+var Testimonial = require('./models/testimonial');
 var paypal = require('paypal-rest-sdk');
 var config = require('../config/config');
 var nodemailer = require('nodemailer');
@@ -172,22 +173,22 @@ module.exports = function(app,passport) {
         });
     });
 
-app.put('/api/confirmOrder', isLoggedIn, function(req, res){
-    paymentId = req.body.paymentId;
-    payerId = req.body.payerId;
-    console.log("Payment ID: " + paymentId);
-    paypal.payment.execute(paymentId, { "payer_id" : payerId }, function (error, payment) {
-        if (error) {
-            console.log(error.response);
-            throw error;
-        }
-        else {
-            console.log("Get Payment Response");
-            console.log(JSON.stringify(payment));
-            res.json({message: "Payment Completed!"})
-        }
+    app.put('/api/confirmOrder', isLoggedIn, function(req, res){
+        paymentId = req.body.paymentId;
+        payerId = req.body.payerId;
+        console.log("Payment ID: " + paymentId);
+        paypal.payment.execute(paymentId, { "payer_id" : payerId }, function (error, payment) {
+            if (error) {
+                console.log(error.response);
+                throw error;
+            }
+            else {
+                console.log("Get Payment Response");
+                console.log(JSON.stringify(payment));
+                res.json({message: "Payment Completed!"})
+            }
+        });
     });
-});
 
 
     //Admin Routes
@@ -202,7 +203,7 @@ app.put('/api/confirmOrder', isLoggedIn, function(req, res){
             if(err) throw(err);
         });
         res.json(req.files);
-});
+    });
 
     //Profile Handling
     app.get('/api/user', isLoggedIn, function(req, res){
@@ -286,19 +287,19 @@ app.put('/api/confirmOrder', isLoggedIn, function(req, res){
 })
 });
 
-app.put('/api/checkResetKey', function(req,res){
-    User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
-        if(!user) throw("User not found");
-        user.local.password = user.generateHash(req.body.password);
-        user.lostPasswordToken = undefined;
-        user.lostPasswordExpires = undefined;
-        user.save(function(err){
-            if(err) throw(err);
-            console.log("Returning now!?")
-            res.json({message: "Password changed!"});                
+    app.put('/api/checkResetKey', function(req,res){
+        User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
+            if(!user) throw("User not found");
+            user.local.password = user.generateHash(req.body.password);
+            user.lostPasswordToken = undefined;
+            user.lostPasswordExpires = undefined;
+            user.save(function(err){
+                if(err) throw(err);
+                console.log("Returning now!?")
+                res.json({message: "Password changed!"});                
+            });
         });
     });
-});
 
 
     //Footer functions
@@ -316,6 +317,61 @@ app.put('/api/checkResetKey', function(req,res){
         });
         res.json({message: "Message Sent."})
     });
+
+    //Testimonial API
+    app.post('/api/testimonial', function(req,res){
+        var testimonial = new Testimonial();
+        testimonial.name = req.body.name;
+        testimonial.testimonial = req.body.testimonial;
+        testimonial.save(function(err){
+            if(err) throw(err);
+            else res.json({success:true, message: "Testimonial Submitted!"});
+        });
+    });
+
+    app.put('/api/testimonial/:testimonial_id',isAdmin,function(req,res){
+        console.log(req.params.testimonial_id);
+        Testimonial.findById(req.params.testimonial_id, function(err,testimonial){
+            if (req.body.approved == true) {
+                testimonial.approved = true;
+                testimonial.save(function(err){
+                    if(err) throw(err);
+                    res.json({success: true, message:"Testimonial Approved!"})
+                });
+            }
+            if (req.body.approved == false){
+                testimonial.remove();
+                res.json({success: true, message:'Testimonial Removed!'});
+            } 
+        });
+    });
+
+    app.get('/api/testimonial/approve', isAdmin, function(req,res){
+        Testimonial.find({approved: false}, function(err,testimonials){
+            if(err) throw(err);
+            res.json(testimonials);
+        })
+    });
+
+    app.get('/api/testimonial', function(req,res){
+        Testimonial.find({approved: true}, function(err,testimonials){
+            if(err) throw(err);
+            res.json(testimonials);
+        })
+    });
+
+    // app.delete('/api/item/:item_id', isAdmin, function(req,res){
+    //     console.log("ding!");
+    //     Item.remove({_id: req.params.item_id},
+    //      function(err, item){
+    //         if(err) res.send(err);
+    //         res.json({message: 'Successfully Deleted'});
+    //     });
+    // });
+
+
+
+
 
     //Sets index file
     app.get('*', function(req, res) {
