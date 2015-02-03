@@ -19,7 +19,7 @@ var db = require('./config/db');
 var config = require('./config/config');
 require('./config/passport')(passport);
 //  our port
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 80; 
 
 // connect to our mongoDB database 
 // (uncomment after you enter in your own credentials in config/db.js)

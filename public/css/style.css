@@ -56,6 +56,10 @@ table {
 	font-size:16px;
 }
 
+.genericSection{
+	margin-top:10px;
+}
+
 .genericSection h1{
 	font-family: "Oswald", sans-serif;
 	font-size:40px;
@@ -78,6 +82,12 @@ table {
 	font-family: "Merriweather",serif;
 	font-size:14px;
 	color:#686868;
+}
+
+.genericSection img{
+	display: block;
+	margin: auto auto;
+	max-width:50%;
 }
 
 
