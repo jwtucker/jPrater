@@ -9,6 +9,8 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 
 	$scope.update = function(productCopy) {
 
+		if($scope.product.wholesalePrice == undefined) $scope.product.wholesalePrice = $scope.product.price;
+
 		for(var i=0; i < productCopy.choices.length; i++){
 			var splitString = productCopy.choices[i].subChoices.split(",");
 			var choicesTemp = [];
@@ -66,6 +68,18 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 
 	$scope.setFile = function (element) {
 		$scope.uploadedFile = element.files[0];
+	}
+
+	$scope.submitWholesale = function(){
+		$http.put('/api/wholesale', {email : $scope.wholesale.email})
+		.success(function(data){
+			flash.setMessage(data.message);
+			$route.reload();
+		})
+		.error(function(data){
+			flash.setMessage("Error submitting request");
+			$route.reload();
+		})
 	}
 
 });

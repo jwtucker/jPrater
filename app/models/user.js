@@ -10,6 +10,7 @@ var userSchema = mongoose.Schema({
         email        	: String,
         password     	: String,
         admin			: {type: Boolean, default: false},
+        wholesale      : {type: Boolean, default: false},
         newsletter      : Boolean
     },
 

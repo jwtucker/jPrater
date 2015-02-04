@@ -114,6 +114,11 @@
             controller: 'AdminController'
         })
 
+        .when('/admin/wholesale', {
+            templateUrl: 'views/adminwholesale.html',
+            controller: 'AdminController'
+        })
+
         //Footer Content
 
         .when('/contact', {

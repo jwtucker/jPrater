@@ -9,6 +9,7 @@ module.exports = mongoose.model('Item', {
     type : 			{type: String, default: ''},
     brand : 		{type: String, default: ''},
     price : 		{type: Number, default: 0.00},
+    wholesalePrice: {type: Number, default: 0.00},
     description : 	{type: String, default: 'No Description'},
     longDescription:{type: String, default: 'No Description'},
     choices: 		[{name:String, subChoices:[{choice: String, price: Number}]}],

@@ -41,7 +41,13 @@ angular.module('UserCtrl',[]).controller("UserController",function($scope, $rout
 	$scope.checkout = function(){
 		$http.put('/api/checkout', $scope.user.user.cart)
 		.success(function(data){
-			$window.location.href = data.links[1].href;
+			if(data.success){
+				$window.location.href = data.links[1].href;				
+			}
+			else{
+				flash.setMessage("Invalid cart detected. Our store may have been modified while you were creating your cart. Try emptying your cart and then checkout. If problem persists, please contact us.");
+				$location.path('/');
+			}
 		});
 	}
 

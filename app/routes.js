@@ -27,6 +27,13 @@ module.exports = function(app,passport) {
         Item.find({type: path},function(err, items) {
             if (err)
                 res.send(err);
+            if(req.user){
+                if(req.user.local.wholesale){
+                    for(var i = 0; i < items.length; i++){
+                        items[i].price = items[i].wholesalePrice;
+                    }
+                }                
+            }
             res.json(items); 
         });
     });
@@ -34,6 +41,11 @@ module.exports = function(app,passport) {
     app.get('/api/item/:item_id', function(req,res){
         Item.findById(req.params.item_id, function(err,item){
             if(err) res.send(err);
+            if(req.user){
+                if(req.user.local.wholesale){
+                    item.price = item.wholesalePrice;
+                }
+            }
             res.json(item);
         });
     });
@@ -55,6 +67,7 @@ module.exports = function(app,passport) {
         item.description = req.body.description;
         item.longDescription = req.body.longDescription;
         item.price = req.body.price;
+        item.wholesalePrice = req.body.wholesalePrice;
         item.choices = req.body.choices;
         item.categories = req.body.categories;
         item.imageSrc = req.body.imageSrc;
@@ -96,15 +109,9 @@ module.exports = function(app,passport) {
 
     //Paypal Routes
 
-    app.put('/api/checkout', isLoggedIn, function(req,res){
+    app.put('/api/checkout', isLoggedIn, validateCart, function(req,res){
 
-        console.log(req.body);
-
-
-        //Query the cart
         var userCart = req.user.cart;
-
-        //console.log("HERE IS THE USERCART" + userCart);
 
         //Create the item list
         var items = [];
@@ -168,6 +175,7 @@ module.exports = function(app,passport) {
                     }
                 }
                 //console.log(payment);
+                payment.success = true;
                 res.json(payment);
             }
         });
@@ -256,11 +264,25 @@ module.exports = function(app,passport) {
         })(req, res, next);
     });
 
+    //Newsletter and wholesaler routes
+
+    app.put('/api/wholesale', isAdmin , function(req,res){
+        var email = req.body.email;
+        User.findOne({'local.email' : email}, function(err,user){
+            if(!user) res.json({success : false, message : "User not found!"});
+            user.local.wholesale = !user.local.wholesale;
+            user.save(function(err){
+                if(err) throw(err);
+                res.json({success : true, message : "User wholesale status is now: " + user.local.wholesale});
+            })
+        });
+    });
+
     //Mailing routes
     app.put('/api/lostPassword', function(req,res){
         var email = req.body.email;
         User.findOne({'local.email' : email}, function(err,user){
-            if(!user) throw("User not found.");
+            if(!user) res.json({message: "User not found."});
 
             crypto.randomBytes(20, function(err,buf){
                 var token = buf.toString('hex');
@@ -289,7 +311,7 @@ module.exports = function(app,passport) {
 
     app.put('/api/checkResetKey', function(req,res){
         User.findOne({'local.email' : req.body.email, lostPasswordToken: req.body.resetKey, lostPasswordExpires: {$gt: Date.now()}}, function(err,user){
-            if(!user) throw("User not found");
+            if(!user) res.json({message: "User/key combination not found. Please try resetting again."});
             user.local.password = user.generateHash(req.body.password);
             user.lostPasswordToken = undefined;
             user.lostPasswordExpires = undefined;
@@ -360,17 +382,6 @@ module.exports = function(app,passport) {
         })
     });
 
-    // app.delete('/api/item/:item_id', isAdmin, function(req,res){
-    //     console.log("ding!");
-    //     Item.remove({_id: req.params.item_id},
-    //      function(err, item){
-    //         if(err) res.send(err);
-    //         res.json({message: 'Successfully Deleted'});
-    //     });
-    // });
-
-
-
 
 
     //Sets index file
@@ -388,5 +399,51 @@ function isLoggedIn(req,res,next) {
 
 function isAdmin(req,res,next) {
     if(req.user.local.admin == true) return next();
+}
+
+function validateCart(req,res,next){
+    var userCart = req.user.cart;
+    var success = true;
+    var counter = 0;
+    var max = userCart.length;
+
+    //Check if the price and the options match to prevent bogus carts
+    for(var i = 0; i < userCart.length; i++){
+        (function(){
+            var cartID = userCart[i].id;
+            var cartPrice = userCart[i].price;
+            var cartOptions = userCart[i].selectedOptions;
+            Item.findById(cartID, function(err,item){
+                console.log (cartPrice + ":::::" + item.price);
+                if(cartPrice != item.price && !req.user.local.wholesale) success = false;
+                if(cartPrice != item.wholesalePrice && req.user.local.wholesale) success = false;
+                if(cartOptions.length != item.choices.length) success = false;
+                for(var j = 0; j < cartOptions.length; j++){
+                    if(cartOptions[j].selectedOption != item.choices[j].name) success = false;
+                    var matchFound = false;             //Need a way to detect if no matches are found
+                    for(var k = 0; k < item.choices[j].subChoices.length; k++){
+                        if(item.choices[j].subChoices[k].choice == cartOptions[j].choice){
+                            matchFound = true;
+                            if(item.choices[j].subChoices[k].price != cartOptions[j].price) success = false;
+                        }
+                    }
+                    if(matchFound == false) success = false;
+                }
+                counter++;
+                if(counter==max){
+                    if(success) return next();
+                    else {
+                        res.json({success:false});
+                        res.end();
+                    };                    
+                }             
+            });
+        })();
+    }
+
+
+
+
+
 }
 
