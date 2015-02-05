@@ -6,6 +6,7 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 	$scope.product.choices = [];
 	$scope.categories = [];
 	$scope.product.categories = [];
+	$scope.newsletter = {};
 
 	$scope.update = function(productCopy) {
 
@@ -79,6 +80,18 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 		.error(function(data){
 			flash.setMessage("Error submitting request");
 			$route.reload();
+		})
+	}
+
+	$scope.submitNewsletter = function(){
+		$http.put('/api/newsletter', {message: $scope.newsletter.message, subject : $scope.newsletter.subject})
+		.success(function(){
+			flash.setMessage("Newsletter successfully sent.");
+			$location.path('/');	
+		})
+		.error(function(){
+			flash.setMessage("Error sending newsletter.");
+			$location.path('/');
 		})
 	}
 

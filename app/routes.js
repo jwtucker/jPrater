@@ -8,6 +8,7 @@ var paypal = require('paypal-rest-sdk');
 var config = require('../config/config');
 var nodemailer = require('nodemailer');
 var crypto = require('crypto');
+var smtpPool = require('nodemailer-smtp-pool');
 var gm = require('gm');
 var fs = require('fs');
 
@@ -228,7 +229,6 @@ module.exports = function(app,passport) {
     });
 
     app.post('/signup', function(req, res, next) {
-        console.log(req.body.newsletter);
         passport.authenticate('local-signup', function(err, user, info) {
             if (err) {
                 console.log("Throwing 500!");
@@ -380,6 +380,27 @@ module.exports = function(app,passport) {
             if(err) throw(err);
             res.json(testimonials);
         })
+    });
+
+
+    //Newsletter Handling
+    app.put('/api/newsletter', isAdmin, function(req,res){
+        var transporter = nodemailer.createTransport(smtpPool(config.transporterMailgun));
+        User.find({'local.newsletter':'true'},function(err,users){
+            users.forEach(function(user){
+                var mailOptions = {
+                    to: user.local.email,
+                    from: 'noreply@retrofitauthority.com',
+                    subject: req.body.subject,
+                    text: req.body.message
+                }
+                transporter.sendMail(mailOptions, function(err){
+                    if(err) throw(err);
+                });
+            });            
+        });
+        
+        res.json({message: "Message sent."});
     });
 
 
