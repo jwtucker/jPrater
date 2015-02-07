@@ -1,4 +1,4 @@
-angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $location, $route, $http, $routeParams, flash) {
+angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $location, $route, $http, $routeParams, $rootScope, flash) {
 
 	$scope.master = {};
 	$scope.choices = [];
@@ -93,6 +93,30 @@ angular.module('AdminCtrl',[]).controller("AdminController",function($scope, $lo
 			flash.setMessage("Error sending newsletter.");
 			$location.path('/');
 		})
+	}
+
+	if($location.path() == '/admin/add' && $rootScope.editItem){
+		console.log("Equal");
+		$scope.product = $rootScope.editItem;
+		for(var i = 0; i < $scope.product.choices.length; i++){
+			$scope.addChoice();
+			var tempString = '';
+			for(var j = 0; j < $scope.product.choices[i].subChoices.length; j++){
+				tempString = tempString + $scope.product.choices[i].subChoices[j].choice + ',' + $scope.product.choices[i].subChoices[j].price + ',';				
+			}
+			tempString = tempString.substring(0, tempString.length - 1)
+			$scope.product.choices[i].subChoices = tempString;
+		}
+		for(var i=0; i < $scope.product.categories.length; i++){
+			$scope.addCategory();
+			var tempString = '';
+			for(var j=0; j < $scope.product.categories[i].subOptions.length; j++){
+				tempString = tempString + $scope.product.categories[i].subOptions[j] + ',';
+			}
+			tempString = tempString.substring(0, tempString.length - 1); 
+			$scope.product.categories[i].subOptions = tempString;
+		}
+		$rootScope.editItem = undefined;
 	}
 
 });

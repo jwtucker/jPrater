@@ -1,4 +1,4 @@
-angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, $rootScope, $timeout, flash) {
+angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $http, $location, $route, $rootScope, $timeout, $window, flash) {
 
 	$scope.user = "No user!";
 	$scope.flash = flash;
@@ -32,9 +32,8 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 	});
 
 	$scope.logOut = function(){
-		console.log("BAM");
 		$http.get('/api/logout');
-		window.location.reload();
+		$window.location.reload();
 	}
 
 	$scope.updateNumberItems = function(){

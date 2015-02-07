@@ -1,0 +1,1 @@
+{ "options" : { "create" : "Item" }, "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "jPrater.Item", "name" : "_id_" } ] }

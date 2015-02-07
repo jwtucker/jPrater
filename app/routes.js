@@ -194,7 +194,11 @@ module.exports = function(app,passport) {
             else {
                 console.log("Get Payment Response");
                 console.log(JSON.stringify(payment));
-                res.json({message: "Payment Completed!"})
+                req.user.cart = [];
+                req.user.save(function(err){
+                    if(err) throw(err);
+                    res.json({message: "Payment Completed!"});
+                });
             }
         });
     });
@@ -229,6 +233,7 @@ module.exports = function(app,passport) {
     });
 
     app.post('/signup', function(req, res, next) {
+        req.body.email = req.body.email.toLowerCase();
         passport.authenticate('local-signup', function(err, user, info) {
             if (err) {
                 console.log("Throwing 500!");
@@ -247,6 +252,7 @@ module.exports = function(app,passport) {
     });
 
     app.post('/login', function(req, res, next) {
+        req.body.email = req.body.email.toLowerCase();
         passport.authenticate('local-login', function(err, user, info) {
             if (err) {
                 console.log("Throwing 500!");

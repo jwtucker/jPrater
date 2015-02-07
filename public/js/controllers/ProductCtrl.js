@@ -1,4 +1,4 @@
-angular.module('ProductCtrl',[]).controller("ProductController",function($scope, $sce, $http, $routeParams, $location, flash) {
+angular.module('ProductCtrl',[]).controller("ProductController",function($scope, $sce, $http, $routeParams, $location, $rootScope, flash) {
 
 	$scope.flash = flash;
 
@@ -26,7 +26,13 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	$scope.deleteProduct = function(){
 		$http.delete("/api/item/" + $scope.id);
 		$location.path('/');
-	};
+	}
+
+	$scope.editProduct = function(){
+		$rootScope.editItem = $scope.product;
+		$http.delete('/api/item/' + $scope.id);
+		$location.path('/admin/add');
+	}
 
 	$scope.updateTotal = function(){
 		for(var i = 0; i < $scope.selectedOptions.length; i++){
@@ -39,6 +45,7 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	}
 
 	$scope.addToCart = function(){
+		$scope.updateTotal();
 		if(parseInt($scope.quantity) < 1 || $scope.quantity == undefined) $scope.quantity = 1;
 		$scope.quantity = parseInt($scope.quantity);
 		var tempObject = { "id" : $scope.id, "name" : $scope.product.name, "quantity" : $scope.quantity , "selectedOptions" : $scope.selectedOptions, "price" : $scope.product.price};
