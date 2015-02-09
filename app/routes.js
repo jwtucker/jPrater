@@ -388,6 +388,17 @@ module.exports = function(app,passport) {
         })
     });
 
+    app.get('/api/testimonialHomepage', function(req,res){
+        Testimonial
+        .find({approved:true})
+        .sort({date: '-1'})
+        .limit(3)
+        .exec(function(err,testimonials){
+            if(err) throw(err);
+            res.json(testimonials);
+        });
+    });
+
 
     //Newsletter Handling
     app.put('/api/newsletter', isAdmin, function(req,res){

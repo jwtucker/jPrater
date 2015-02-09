@@ -32,8 +32,10 @@ angular.module('HeaderCtrl',[]).controller("HeaderController",function($scope, $
 	});
 
 	$scope.logOut = function(){
-		$http.get('/api/logout');
-		$window.location.reload();
+		$http.get('/api/logout')
+		.success(function(){
+			$window.location.reload();			
+		})
 	}
 
 	$scope.updateNumberItems = function(){

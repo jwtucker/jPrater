@@ -82,3 +82,14 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="container" ng-if="testimonials">
+		<div class="genericSection">
+			<h1>Customer Testimonials</h1>
+			<div ng-repeat="testimonial in testimonials">
+				<h2>{{testimonial.name}}</h2>
+				<p>{{testimonial.testimonial}}</p>
+				<p>-{{testimonial.date}}</p>
+			</div>
+		</div>
+	</div>
