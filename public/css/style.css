@@ -326,6 +326,11 @@ table {
 	overflow:hidden;
 }
 
+.galleryItem:hover{
+	cursor:pointer;
+	cursor:hand;
+}
+
 .galleryItem h1{
 	position: absolute;
 	display:inline-block;
