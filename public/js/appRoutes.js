@@ -34,19 +34,10 @@
             controller: 'TestimonialController'
         })
 
-        .when('/retrofitkits',{
+
+        .when('/halokits',{
         	templateUrl: 'views/gallery.html',
         	controller: 'GalleryController'
-        })
-
-        .when('/hidsystems',{
-            templateUrl: 'views/gallery.html',
-            controller: 'GalleryController'
-        })
-
-        .when('/components',{
-            templateUrl: 'views/gallery.html',
-            controller: 'GalleryController'
         })
 
         .when('/ledlighting',{
@@ -54,7 +45,12 @@
             controller: 'GalleryController'
         })
 
-        .when('/offroadlighting',{
+        .when('/hidproducts',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/retrofitproducts',{
             templateUrl: 'views/gallery.html',
             controller: 'GalleryController'
         })
@@ -65,6 +61,11 @@
         })
 
         .when('/housings',{
+            templateUrl: 'views/gallery.html',
+            controller: 'GalleryController'
+        })
+
+        .when('/clearance',{
             templateUrl: 'views/gallery.html',
             controller: 'GalleryController'
         })
