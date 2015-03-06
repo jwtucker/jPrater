@@ -11,10 +11,16 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="productImage">
-				<img ng-src="uploads/{{product.imageSrc}}" alt="">				
+				<img ng-src="uploads/{{currentImage}}" alt="">				
 			</div>
-			<div class="productImageIcon" ng-repeat='imageSrc in product.imageSrcSet'>
-				<img ng-src="uploads/{{imageSrc}}" alt="">
+			<div class="productImageIconWrapper" ng-if="product.imageSrcSet.length>0">
+				<div class="productImageIcon">
+					<img ng-src="uploads/{{product.imageSrc}}" alt="" ng-click="setImage(product.imageSrc)">	
+				</div>
+
+				<div class="productImageIcon" ng-repeat='imageSrc in product.imageSrcSet'>
+					<img ng-src="uploads/{{imageSrc}}" alt="" ng-click="setImage(imageSrc)">				
+				</div>				
 			</div>
 		</div>
 		<div class="col-md-6">

@@ -10,6 +10,7 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	$http.get("/api/item/" + $scope.id)
 	.success(function(product){
 		$scope.product = product;
+		$scope.currentImage = $scope.product.imageSrc
 		$scope.trustedLongDescription = $sce.trustAsHtml($scope.product.longDescription);
 	})
 	.error(function(items){
@@ -63,5 +64,9 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 			$location.path('/signup');
 		});
 
+	}
+
+	$scope.setImage = function(src){
+		$scope.currentImage = src;
 	}
 });
