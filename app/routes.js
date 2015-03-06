@@ -72,6 +72,7 @@ module.exports = function(app,passport) {
         item.choices = req.body.choices;
         item.categories = req.body.categories;
         item.imageSrc = req.body.imageSrc;
+        item.imageSrcSet = req.body.imageSrcSet;
 
         item.save(function(err) {
             if (err)

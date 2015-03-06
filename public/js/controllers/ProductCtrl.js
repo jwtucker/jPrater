@@ -29,6 +29,7 @@ angular.module('ProductCtrl',[]).controller("ProductController",function($scope,
 	}
 
 	$scope.editProduct = function(){
+		$scope.product.imageSrcSet = [];
 		$rootScope.editItem = $scope.product;
 		$http.delete('/api/item/' + $scope.id);
 		$location.path('/admin/add');

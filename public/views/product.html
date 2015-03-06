@@ -13,6 +13,9 @@
 			<div class="productImage">
 				<img ng-src="uploads/{{product.imageSrc}}" alt="">				
 			</div>
+			<div class="productImageIcon" ng-repeat='imageSrc in product.imageSrcSet'>
+				<img ng-src="uploads/{{imageSrc}}" alt="">
+			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="productTitle">

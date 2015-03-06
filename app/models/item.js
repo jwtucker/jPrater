@@ -14,5 +14,6 @@ module.exports = mongoose.model('Item', {
     longDescription:{type: String, default: 'No Description'},
     choices: 		[{name:String, subChoices:[{choice: String, price: Number}]}],
     categories:     [{name:String, subOptions: []}],
-    imageSrc:   	{type: String, default: ''}
+    imageSrc:   	{type: String, default: ''},
+    imageSrcSet:    [{type:String}]
 });

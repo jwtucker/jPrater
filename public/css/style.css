@@ -505,6 +505,17 @@ table {
 	box-shadow: 10px 10px 12px 0px rgba(0,0,0,0.41);
 }
 
+.productImageIcon{
+	display: inline-block;
+	width: 64px;
+	height: auto;
+}
+
+.productImageIcon img{
+	width: 100%;
+	height: 100%;
+}
+
 .productOptions{
 	border-top:solid;
 	border-color:#dddddd;

@@ -5,10 +5,22 @@
 	action    =  "/api/uploads"
 	method    =  "post"
 	>
-	<!-- <input type="file" id="file" name="userPhoto" /> -->
 	<input type="file" id="uploadFile" ng-model="upFile" onchange="angular.element(this).scope().setFile(this)" />
+
+	<button ng-click="addImage()" type="button" class="btn btn-warning btn-sm">
+		<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add Image
+	</button>
+
+	<div ng-repeat='image in images'>
+		<input type="file"  onchange="angular.element(this).scope().setFileSet(this, angular.element(this).scope().$index)" />
+	</div>
+
 	<input type="submit" value="Upload Image" id="fileUploadSubmit" name="submit" style="display:none;">
 </form>
+
+
+
+
 <form novalidate class="addForm">
 	Name: <input class="form-control" type="text" ng-model="product.name" /> <br />
 	Type: <select class="form-control" ng-model="product.type">
@@ -27,7 +39,7 @@ Short Description: <textarea class="form-control" rows="4" ng-model="product.des
 Long Description: <textarea class="form-control" rows="6" ng-model="product.longDescription"></textarea> <br />
 
 <button ng-click="addChoice()" type="button" class="btn btn-warning btn-sm">
-	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> ADD Option
+	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> Add Option
 </button>
 
 
@@ -49,4 +61,8 @@ Long Description: <textarea class="form-control" rows="6" ng-model="product.long
 </form>
 </div>
 
-<div class="well">{{product}}</div>
+<div class="well">
+	{{product}}
+
+	{{uploadedFileSet.length}}
+</div>
