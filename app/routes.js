@@ -13,7 +13,7 @@ var gm = require('gm');
 var fs = require('fs');
 
 paypal.configure({
-    'mode' : 'sandbox',
+    'mode' : config.mode,
     'client_id' : config.client_id,
     'client_secret' : config.client_secret
 });
